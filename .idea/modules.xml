@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/MajorProject-SEM-8.iml" filepath="$PROJECT_DIR$/.idea/MajorProject-SEM-8.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-registry/sem8/sem8.iml" filepath="$PROJECT_DIR$/service-registry/sem8/sem8.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-gateway/sem8/sem8 (1).iml" filepath="$PROJECT_DIR$/api-gateway/sem8/sem8 (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service/sem8/sem8 (2).iml" filepath="$PROJECT_DIR$/auth-service/sem8/sem8 (2).iml" />
     </modules>
   </component>
 </project>
