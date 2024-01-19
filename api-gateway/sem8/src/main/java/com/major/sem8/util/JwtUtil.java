@@ -15,7 +15,7 @@ public class JwtUtil {
 
     public boolean validateToken(final String token) {
         try {
-            Jwts.parser().setSigningKey(getSignKey()).parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
             return true;
         }catch (Exception e){
             throw new RuntimeException("validation failed");

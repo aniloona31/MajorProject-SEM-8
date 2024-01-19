@@ -66,7 +66,7 @@ public class JwtService {
 //        final String username = getUsernameFromToken(token);
 //        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
         try {
-            Jwts.parser().setSigningKey(getSignKey()).parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
             return true;
         }catch (Exception e){
             throw new RuntimeException("validation failed");
