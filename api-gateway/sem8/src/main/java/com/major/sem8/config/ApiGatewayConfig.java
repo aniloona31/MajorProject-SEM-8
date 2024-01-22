@@ -13,6 +13,7 @@ public class ApiGatewayConfig {
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r -> r.path("/auth/**").uri("lb://auth-service"))
+                .route(r -> r.path("/place/**").uri("lb://place-service"))
                 .build();
     }
 }
