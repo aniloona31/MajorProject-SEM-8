@@ -27,4 +27,6 @@ public class PlaceController {
     public ResponseEntity<Place> getPlaceById(@PathVariable Long id){
         return new ResponseEntity<>(placeService.getPlaceById(id),HttpStatus.OK);
     }
+
+
 }

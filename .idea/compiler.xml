@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sem8" />
         <module name="sem8 (5)" />
+        <module name="sem8 (6)" />
         <module name="sem8 (3)" />
         <module name="sem8 (4)" />
         <module name="sem8 (1)" />
@@ -21,6 +22,7 @@
       <module name="sem8 (3)" target="17" />
       <module name="sem8 (4)" target="17" />
       <module name="sem8 (5)" target="17" />
+      <module name="sem8 (6)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -31,6 +33,7 @@
       <module name="sem8 (3)" options="-parameters" />
       <module name="sem8 (4)" options="-parameters" />
       <module name="sem8 (5)" options="-parameters" />
+      <module name="sem8 (6)" options="-parameters" />
     </option>
   </component>
 </project>
