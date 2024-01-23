@@ -24,7 +24,7 @@ public class PlaceService {
 
             return content;
         }catch (Exception e){
-            throw new RuntimeException("error occured whild getting the page");
+            throw new RuntimeException("error occured while getting the page");
         }
     }
 
