@@ -19,7 +19,20 @@ public class ReviewController{
     private ReviewService reviewService;
 
     @PostMapping("/add-review")
-    public ResponseEntity<String> addReview(@RequestBody Review review, @RequestParam("image") MultipartFile images) throws IOException {
+    public ResponseEntity<String> addReview(@RequestParam("description") String description,
+                                            @RequestParam("placeId") Long placeId ,
+                                            @RequestParam("ticketId") String ticketId,
+                                            @RequestParam("email") String email,
+                                            @RequestParam("username") String username,
+                                            @RequestParam("rating") Integer rating,
+                                            @RequestParam("images") List<MultipartFile> images) throws IOException {
+        Review review = new Review();
+        review.setDescription(description);
+        review.setRating(rating);
+        review.setEmail(email);
+        review.setUsername(username);
+        review.setPlaceId(placeId);
+        review.setTicketId(ticketId);
         return new ResponseEntity<>(reviewService.addReview(images,review), HttpStatus.OK);
     }
 

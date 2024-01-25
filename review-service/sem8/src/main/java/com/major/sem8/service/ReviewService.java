@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class ReviewService {
@@ -25,19 +27,24 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    private Map uploadImageToCloudinary(MultipartFile images) throws IOException {
+    private List<String> uploadImageToCloudinary(List<MultipartFile> images) throws IOException {
         try {
-            Map data = cloudinary.uploader().upload(images.getBytes(), Map.of());
+            List<String> data = new ArrayList<>();
+            for(MultipartFile image : images){
+                data.add(cloudinary.uploader().upload(image.getBytes(),Map.of()).get("url").toString());
+            }
+            System.out.println(data);
             return data;
         }catch (Exception e){
             throw new ApplicationException("couldn't upload image to cloud", HttpStatus.BAD_REQUEST);
         }
     }
 
-    public String addReview(MultipartFile images, Review review) throws IOException {
+    public String addReview(List<MultipartFile> images, Review review) throws IOException {
         try{
-            Map data = uploadImageToCloudinary(images);
-            review.setImages(List.of(data.get("url")));
+            List<String> data = uploadImageToCloudinary(images);
+//            System.out.println(data.get("url").toString());
+            review.setImages(data);
             reviewRepository.save(review);
             return "review uploaded succesfully";
         }catch (Exception e){
@@ -56,5 +63,6 @@ public class ReviewService {
         }
 
     }
+
 
 }

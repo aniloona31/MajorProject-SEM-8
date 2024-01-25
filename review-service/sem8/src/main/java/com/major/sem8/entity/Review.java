@@ -24,13 +24,13 @@ public class Review {
 
     private String description;
 
-    private List<Object> images;
+    private List<String> images;
 
     @NotNull
     private Long placeId;
 
     @NotNull
-    private Long ticketId;
+    private String ticketId;
 
     @NotNull
     private String email;
