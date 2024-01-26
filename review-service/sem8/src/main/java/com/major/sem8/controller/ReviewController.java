@@ -1,5 +1,6 @@
 package com.major.sem8.controller;
 
+import com.major.sem8.dto.ReviewResponse;
 import com.major.sem8.entity.Review;
 import com.major.sem8.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,9 @@ public class ReviewController{
     }
 
     @GetMapping("/top-reviews/{placeId}")
-    public ResponseEntity<List<Review>> getTopReviews(@PathVariable Long placeId
-            ,@RequestParam(value = "pageSize",defaultValue = "3") Integer pageSize
-            ,@RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber){
+    public ResponseEntity<List<ReviewResponse>> getTopReviews(@PathVariable Long placeId
+            , @RequestParam(value = "pageSize",defaultValue = "3") Integer pageSize
+            , @RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber){
         return new ResponseEntity<>(reviewService.getReviews(placeId,pageNumber,pageSize),HttpStatus.OK);
     }
 }

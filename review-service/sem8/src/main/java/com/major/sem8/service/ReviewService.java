@@ -1,6 +1,7 @@
 package com.major.sem8.service;
 
 import com.cloudinary.Cloudinary;
+import com.major.sem8.dto.ReviewResponse;
 import com.major.sem8.entity.Review;
 import com.major.sem8.exception.ApplicationException;
 import com.major.sem8.repository.ReviewRepository;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -52,17 +54,26 @@ public class ReviewService {
         }
     }
 
-    public List<Review> getReviews(Long placeId,int pageNumber,int pageSize) {
+    public List<ReviewResponse> getReviews(Long placeId, int pageNumber, int pageSize) {
         try {
             Pageable pageable = PageRequest.of(pageNumber,pageSize);
             Page<Review> page = reviewRepository.findAll(pageable);
             List<Review> content = page.getContent();
-            return content;
+            return content.stream()
+                    .map(this::mapToDto)
+                    .collect(Collectors.toList());
+
         }catch (Exception e){
             throw new ApplicationException("couldn't fetch reviews from db" , HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
 
-
+    protected ReviewResponse mapToDto(Review review){
+        return ReviewResponse.builder()
+                .description(review.getDescription())
+                .username(review.getUsername())
+                .images(review.getImages())
+                .build();
+    }
 }
