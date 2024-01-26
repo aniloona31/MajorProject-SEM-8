@@ -29,5 +29,9 @@ public class PlaceController {
         return new ResponseEntity<>(placeService.getPlaceById(id),HttpStatus.OK);
     }
 
+    @GetMapping("/price")
+    public ResponseEntity<Double> getPrice(@RequestParam("placeId") Long placeId){
+        return new ResponseEntity<>(placeService.getPrice(placeId),HttpStatus.OK);
+    }
 
 }

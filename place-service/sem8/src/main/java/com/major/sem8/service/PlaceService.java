@@ -59,4 +59,9 @@ public class PlaceService {
                 .reviews(reviews)
                 .build();
     }
+
+    public Double getPrice(Long placeId) {
+        Place place = placeRepository.findById(placeId).orElseThrow(() ->  new ApplicationException("INVALID PLACE",HttpStatus.BAD_REQUEST));
+        return Double.parseDouble(place.getTicketPrice());
+    }
 }
