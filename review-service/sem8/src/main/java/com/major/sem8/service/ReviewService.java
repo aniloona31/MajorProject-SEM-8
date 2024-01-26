@@ -69,6 +69,29 @@ public class ReviewService {
 
     }
 
+    public String updateReview(Review updatedReview){
+        try {
+            Review existingReview = reviewRepository.findByTicketId(updatedReview.getTicketId())
+                                    .orElseThrow(() -> new ApplicationException("invaild ticket id",HttpStatus.BAD_REQUEST));
+            existingReview.setDescription(updatedReview.getDescription());
+            existingReview.setRating(updatedReview.getRating());
+            reviewRepository.save(existingReview);
+            return "review updated";
+        }catch (Exception e){
+            throw new ApplicationException("review couldn't be updated", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ReviewResponse getReview(String ticketId){
+        try{
+            Review review = reviewRepository.findByTicketId(ticketId)
+                    .orElseThrow(() -> new ApplicationException("invalid ticket id",HttpStatus.BAD_REQUEST));
+            return mapToDto(review);
+        }catch (Exception e){
+            throw new ApplicationException("error while fetching the review",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     protected ReviewResponse mapToDto(Review review){
         return ReviewResponse.builder()
                 .description(review.getDescription())

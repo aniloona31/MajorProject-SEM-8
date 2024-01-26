@@ -43,4 +43,20 @@ public class ReviewController{
             , @RequestParam(value = "pageNumber",defaultValue = "0") Integer pageNumber){
         return new ResponseEntity<>(reviewService.getReviews(placeId,pageNumber,pageSize),HttpStatus.OK);
     }
+
+    @PutMapping("/update-review")
+    public ResponseEntity<String> updateReview(@RequestParam("description") String description,
+                                               @RequestParam("ticketId") String ticketId,
+                                               @RequestParam("rating") Integer rating){
+        Review review = new Review();
+        review.setDescription(description);
+        review.setRating(rating);
+        review.setTicketId(ticketId);
+        return new ResponseEntity<>(reviewService.updateReview(review),HttpStatus.OK);
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<ReviewResponse> getReview(@RequestParam("ticketId") String ticketId){
+        return new ResponseEntity<>(reviewService.getReview(ticketId),HttpStatus.OK);
+    }
 }
