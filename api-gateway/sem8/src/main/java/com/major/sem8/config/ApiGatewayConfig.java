@@ -19,6 +19,7 @@ public class ApiGatewayConfig {
                 .route(r -> r.path("/auth/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://auth-service"))
                 .route(r -> r.path("/place/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://place-service"))
                 .route(r -> r.path("/review/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://review-service"))
+                .route(r -> r.path("/ticket/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://ticket-service"))
                 .build();
     }
 }
