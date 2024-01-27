@@ -5,12 +5,17 @@ import com.major.sem8.entity.Ticket;
 import com.major.sem8.exception.ApplicationException;
 import com.major.sem8.proxy.PlaceProxy;
 import com.major.sem8.repository.TicketRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +26,11 @@ public class TicketService {
 
     @Autowired
     private PlaceProxy placeProxy;
+
+    @Autowired
+    private KafkaTemplate<String,Ticket> kafkaTemplate;
+
+    private static Logger LOG = LoggerFactory.getLogger(TicketService.class);
 
     private Double getTicketPrice(Long placeId){
         try{
@@ -39,6 +49,17 @@ public class TicketService {
             details.setTicketId(ticketId);
             details.setConfirmation(false);
             Ticket ticket = ticketRepository.save(details);
+
+            LOG.info("Processed: ticket->{}", ticket);
+
+            CompletableFuture<SendResult<String, Ticket>> result = kafkaTemplate
+                    .send("ticket-event", ticket);
+            result.whenComplete((sr, ex) ->
+                    LOG.debug("Sent(key={},partition={}): {}",
+                            sr.getProducerRecord().partition(),
+                            sr.getProducerRecord().key(),
+                            sr.getProducerRecord().value()));
+
             return mapToDto(ticket);
         }catch(Exception e){
             throw new ApplicationException("error while generating ticket", HttpStatus.INTERNAL_SERVER_ERROR);
