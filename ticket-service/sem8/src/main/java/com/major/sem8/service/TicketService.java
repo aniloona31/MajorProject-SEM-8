@@ -1,5 +1,6 @@
 package com.major.sem8.service;
 
+import com.major.sem8.entity.Payment;
 import com.major.sem8.dto.TicketResponse;
 import com.major.sem8.entity.Ticket;
 import com.major.sem8.exception.ApplicationException;
@@ -35,6 +36,7 @@ public class TicketService {
     private Double getTicketPrice(Long placeId){
         try{
             Double price = placeProxy.getPrice(placeId).getBody();
+            System.out.println(price);
             return price;
         }catch (Exception e){
             throw new ApplicationException("UNABLE TO FETCH PRICE",HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,6 +76,19 @@ public class TicketService {
                     .collect(Collectors.toList());
         }catch (Exception e){
             throw new ApplicationException("couldn't get tickets for the user", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public void processPaymentStatus(Payment payment){
+        Ticket ticket = ticketRepository.findByTicketId(payment.getTicketId())
+                .orElseThrow(() -> new ApplicationException("ERROR WHILE FETCHING TICKET",HttpStatus.BAD_REQUEST));
+        try{
+            if(payment.getPaymentStatus().equals("SUCCESSFUL")){
+                ticket.setConfirmation(true);
+                ticketRepository.save(ticket);
+            }
+        }catch (Exception e){
+            throw new ApplicationException("ERROR WHILE UPDATING TICKET STATUS",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

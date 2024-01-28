@@ -43,9 +43,10 @@ public class ReviewService {
     }
 
     public String addReview(List<MultipartFile> images, Review review) throws IOException {
-        try{
-            List<String> data = uploadImageToCloudinary(images);
+
+        List<String> data = uploadImageToCloudinary(images);
 //            System.out.println(data.get("url").toString());
+        try{
             review.setImages(data);
             reviewRepository.save(review);
             return "review uploaded succesfully";
@@ -70,26 +71,23 @@ public class ReviewService {
     }
 
     public String updateReview(Review updatedReview){
+        Review existingReview = reviewRepository.findByTicketId(updatedReview.getTicketId())
+                .orElseThrow(() -> new ApplicationException("invalid ticket id",HttpStatus.BAD_REQUEST));
+        existingReview.setDescription(updatedReview.getDescription());
+        existingReview.setRating(updatedReview.getRating());
         try {
-            Review existingReview = reviewRepository.findByTicketId(updatedReview.getTicketId())
-                                    .orElseThrow(() -> new ApplicationException("invaild ticket id",HttpStatus.BAD_REQUEST));
-            existingReview.setDescription(updatedReview.getDescription());
-            existingReview.setRating(updatedReview.getRating());
             reviewRepository.save(existingReview);
-            return "review updated";
         }catch (Exception e){
-            throw new ApplicationException("review couldn't be updated", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ApplicationException("error while updating review in db",HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return "review updated";
     }
 
     public ReviewResponse getReview(String ticketId){
-        try{
-            Review review = reviewRepository.findByTicketId(ticketId)
+        Review review = reviewRepository.findByTicketId(ticketId)
                     .orElseThrow(() -> new ApplicationException("invalid ticket id",HttpStatus.BAD_REQUEST));
-            return mapToDto(review);
-        }catch (Exception e){
-            throw new ApplicationException("error while fetching the review",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return mapToDto(review);
+
     }
 
     protected ReviewResponse mapToDto(Review review){

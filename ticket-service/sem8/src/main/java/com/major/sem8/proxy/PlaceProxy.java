@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "place-service")
 public interface PlaceProxy {
 
-    @GetMapping("/ticket-price")
+    @GetMapping("/place/price")
     public ResponseEntity<Double> getPrice(@RequestParam("placeId") Long placeId);
 }

@@ -1,6 +1,6 @@
 package com.major.sem8.config;
 
-import com.major.sem8.entity.Ticket;
+import com.major.sem8.entity.Payment;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -31,18 +31,18 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, Ticket> producerFactory(){
+    public ProducerFactory<String, Payment> producerFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String,Ticket> kafkaTemplate(){
+    public KafkaTemplate<String,Payment> kafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
     public NewTopic topicExample() {
-        return TopicBuilder.name("ticket-event")
+        return TopicBuilder.name("payment-event")
                 .partitions(3)
                 .replicas(1)
                 .build();
