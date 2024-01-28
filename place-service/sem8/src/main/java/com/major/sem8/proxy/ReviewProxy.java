@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "review-service")
+@FeignClient(name = "review-service",url = "http://localhost:9095")
 public interface ReviewProxy {
 
     @GetMapping("/review/top-reviews/{id}")

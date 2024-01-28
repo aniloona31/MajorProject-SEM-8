@@ -39,8 +39,8 @@ public class PlaceService {
     }
 
     public PlaceResponse getPlaceById(Long id){
+        Place place = placeRepository.findById(id).orElseThrow(() -> new RuntimeException("place with id doesn't exist"));
         try {
-            Place place = placeRepository.findById(id).orElseThrow(() -> new RuntimeException("place with id doesn't exist"));
             ResponseEntity<List<Object>> reviews = reviewProxy.getTopReviews(place.getId());
             System.out.println(reviews);
             return mapToDto(place,reviews.getBody());
