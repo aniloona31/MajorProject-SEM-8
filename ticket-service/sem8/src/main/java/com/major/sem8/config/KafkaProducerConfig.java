@@ -47,4 +47,12 @@ public class KafkaProducerConfig {
                 .replicas(1)
                 .build();
     }
+
+    @Bean
+    public NewTopic emailTopic() {
+        return TopicBuilder.name("email-event")
+                .partitions(3)
+                .replicas(1)
+                .build();
+    }
 }

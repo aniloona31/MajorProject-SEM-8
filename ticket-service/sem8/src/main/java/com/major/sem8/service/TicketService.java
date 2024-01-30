@@ -88,6 +88,16 @@ public class TicketService {
                 ticket.setConfirmation(true);
                 ticket.setValid(true);
                 ticketRepository.save(ticket);
+
+                LOG.info("Processed: ticket->{}", ticket);
+
+                CompletableFuture<SendResult<String, Ticket>> result = kafkaTemplate
+                        .send("email-event", ticket);
+                result.whenComplete((sr, ex) ->
+                        LOG.debug("Sent(key={},partition={}): {}",
+                                sr.getProducerRecord().partition(),
+                                sr.getProducerRecord().key(),
+                                sr.getProducerRecord().value()));
             }
         }catch (Exception e){
             throw new ApplicationException("ERROR WHILE UPDATING TICKET STATUS",HttpStatus.INTERNAL_SERVER_ERROR);
