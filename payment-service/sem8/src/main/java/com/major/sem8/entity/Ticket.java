@@ -29,4 +29,6 @@ public class Ticket {
     private String placeName;
 
     private boolean confirmation;
+
+    private boolean isValid;
 }

@@ -50,6 +50,7 @@ public class TicketService {
             String ticketId = UUID.randomUUID().toString();
             details.setTicketId(ticketId);
             details.setConfirmation(false);
+            details.setValid(false);
             Ticket ticket = ticketRepository.save(details);
 
             LOG.info("Processed: ticket->{}", ticket);
@@ -85,6 +86,7 @@ public class TicketService {
         try{
             if(payment.getPaymentStatus().equals("SUCCESSFUL")){
                 ticket.setConfirmation(true);
+                ticket.setValid(true);
                 ticketRepository.save(ticket);
             }
         }catch (Exception e){
@@ -100,6 +102,7 @@ public class TicketService {
                 .bookedDates(ticket.getBookedDates())
                 .quantity(ticket.getQuantity())
                 .placeName(ticket.getPlaceName())
+                .isValid(ticket.isValid())
                 .build();
     }
 }
