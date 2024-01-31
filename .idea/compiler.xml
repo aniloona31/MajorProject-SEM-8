@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="sem8 (7)" />
+        <module name="sem8 (8)" />
         <module name="sem8" />
         <module name="sem8 (5)" />
         <module name="sem8 (6)" />
@@ -25,6 +26,7 @@
       <module name="sem8 (5)" target="17" />
       <module name="sem8 (6)" target="17" />
       <module name="sem8 (7)" target="17" />
+      <module name="sem8 (8)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -37,6 +39,7 @@
       <module name="sem8 (5)" options="-parameters" />
       <module name="sem8 (6)" options="-parameters" />
       <module name="sem8 (7)" options="-parameters" />
+      <module name="sem8 (8)" options="-parameters" />
     </option>
   </component>
 </project>
