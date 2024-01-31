@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Confirmation</title>
+</head>
+<body>
+<div th:fragment="emailBody(ticket)">
+    <h1 th:text="'Ticket Confirmation - #' + ${ticket.ticketId}"></h1>
+    <p th:text="'Dear ' + ${ticket.email} + ','"></p>
+    <p>Your ticket has been successfully booked. Below are the details:</p>
+    <ul>
+        <li><strong>Ticket Number:</strong> <span th:text="${ticket.ticketId}"></span></li>
+        <li><strong>Event Name:</strong> <span th:text="${ticket.placeName}"></span></li>
+        <li><strong>Event Date:</strong> <span th:text="${ticket.bookedDates[0]}"></span></li>
+        <li><strong>Amount Paid:</strong> <span th:text="${ticket.price}"></span></li>
+        <li><strong>Quantity:</strong> <span th:text="${ticket.quantity}"></span></li>
+        <!-- Add more ticket details here as needed -->
+    </ul>
+    <p>Thank you for booking with us. Enjoy the tour!</p>
+    <p>Best regards,<br/>Your Ticketing Team GHUMANTU</p>
+</div>
+</body>
+</html>
