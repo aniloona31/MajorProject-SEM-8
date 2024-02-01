@@ -21,6 +21,8 @@ public class ApiGatewayConfig {
                 .route(r -> r.path("/review/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://review-service"))
                 .route(r -> r.path("/ticket/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://ticket-service"))
                 .route(r -> r.path("/payment/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://payment-service"))
+                .route(r -> r.path("/answer/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://qanda-service"))
+                .route(r -> r.path("/question/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://qanda-service"))
                 .build();
     }
 }
