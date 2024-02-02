@@ -25,6 +25,7 @@ public class ApiGatewayConfig {
                 .route(r -> r.path("/answer/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://qanda-service"))
                 .route(r -> r.path("/question/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://qanda-service"))
                 .route(r -> r.path("/qanda-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://qanda-service"))
+                .route(r -> r.path("/auth-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://auth-service"))
                 .build();
     }
 }
