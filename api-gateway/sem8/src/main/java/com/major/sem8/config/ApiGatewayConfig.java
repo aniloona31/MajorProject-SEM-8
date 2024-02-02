@@ -7,6 +7,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 public class ApiGatewayConfig {
@@ -23,6 +24,7 @@ public class ApiGatewayConfig {
                 .route(r -> r.path("/payment/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://payment-service"))
                 .route(r -> r.path("/answer/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://qanda-service"))
                 .route(r -> r.path("/question/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://qanda-service"))
+                .route(r -> r.path("/qanda-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://qanda-service"))
                 .build();
     }
 }

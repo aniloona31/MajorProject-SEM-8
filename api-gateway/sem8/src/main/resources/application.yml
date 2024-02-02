@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: api-gateway
+server:
+  port: 8765
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui/index.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: api-gateway
+      - url: /qanda-service/v3/api-docs
+        name: qanda-service
+      - url: /auth-service/v3/api-docs
+        name: auth-service
+      - url: /payment-service/v3/api-docs
+        name: payment-service
+      - url: /place-service/v3/api-docs
+        name: place-service
+      - url: /review-service/v3/api-docs
+        name: review-service
+      - url: /ticket-service/v3/api-docs
+        name: ticket-service
+
