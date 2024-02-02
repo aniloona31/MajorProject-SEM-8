@@ -17,7 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/ticket/**")
+                        .requestMatchers("/ticket/**","/ticket-service/v3/api-docs/**","/ticket-service/swagger-ui/**")
                         .access(hasIpAddress("127.0.0.1"))
                         .anyRequest()
                         .authenticated()).build();

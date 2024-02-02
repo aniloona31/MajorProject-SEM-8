@@ -17,7 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/place/**")
+                        .requestMatchers("/place/**","/place-service/v3/api-docs/**","/place-service/swagger-ui/**")
                         .access(hasIpAddress("127.0.0.1"))
                         .anyRequest()
                         .authenticated()).build();
