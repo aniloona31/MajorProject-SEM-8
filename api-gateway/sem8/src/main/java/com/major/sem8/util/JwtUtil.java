@@ -13,6 +13,15 @@ public class JwtUtil {
 
     private String secret = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
+    public String getEmail(final String token){
+        return Jwts.parserBuilder()
+                   .setSigningKey(getSignKey())
+                   .build()
+                   .parseClaimsJws(token)
+                   .getBody()
+                   .getSubject();
+    }
+
     public boolean validateToken(final String token) {
         try {
             Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token);
