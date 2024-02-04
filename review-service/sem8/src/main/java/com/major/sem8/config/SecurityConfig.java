@@ -21,9 +21,7 @@ public class SecurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/review/**","/review-service/v3/api-docs/**","/review-service/swagger-ui/**")
-                        .access(hasIpAddress("127.0.0.1"))
-                        .anyRequest()
-                        .authenticated()).build();
+                        .permitAll()).build();
     }
 
     private static AuthorizationManager<RequestAuthorizationContext> hasIpAddress(String ipAddress) {
