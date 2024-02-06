@@ -20,7 +20,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/review/**","/review-service/v3/api-docs/**","/review-service/swagger-ui/**")
+                        .requestMatchers("/review/**","/review-service/v3/api-docs/**","/review-service/swagger-ui/**"
+                        ,"/actuator/**")
                         .permitAll()).build();
     }
 
