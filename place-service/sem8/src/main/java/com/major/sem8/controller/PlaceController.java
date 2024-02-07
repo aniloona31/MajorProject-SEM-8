@@ -4,6 +4,7 @@ import com.major.sem8.dto.PlaceResponse;
 import com.major.sem8.entity.Place;
 import com.major.sem8.service.PlaceService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class PlaceController {
 
     @GetMapping("/all/{city}")
     @CircuitBreaker(name = "PlaceService", fallbackMethod = "getDefaultPlaces")
+    @Retry(name = "PlaceService")
     public ResponseEntity<List<PlaceResponse>> getAllPlacesByCity(@PathVariable String city,
                                                           @RequestParam(value = "pageSize",defaultValue = "10",required = false) Integer pageSize,
                                                           @RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber){
