@@ -1,0 +1,32 @@
+.searchBar{
+    display: flex;
+    direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 20px 20px;
+    background-color: #FFFFFF;
+    width: 100%;
+}
+
+.leftElements{
+    display: flex;
+    direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.centreElements{
+    display: flex;
+    direction: row;
+    align-items: center;
+    flex: 3;
+}
+
+.rightElements{
+    display: flex;
+    direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex: 2;
+}
