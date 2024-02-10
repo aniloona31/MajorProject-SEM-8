@@ -28,7 +28,8 @@ function MyCarousel() {
             width="100%" 
             centerSlidePercentage={80} 
             centerMode={true}
-            showThumbs={false}>
+            showThumbs={false}
+            showStatus={false}>
             {homeImages?.map((item) => {
                 return(
                     <div key={item.placeName} className='image'>
