@@ -1,0 +1,19 @@
+
+img{
+    object-fit: fill;
+    max-height: 400px;
+    min-height: 50px;
+    position: relative;
+}
+
+.placeName{
+    position: absolute;
+    top: 300px;;
+    font-weight: 500;
+    font-size: x-large;
+    color: white;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgba(0,0,0,0.5);
+}
