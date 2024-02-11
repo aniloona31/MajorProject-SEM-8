@@ -76,7 +76,7 @@ const topPlaces = [
 
 function Recommended() {
   return (
-    <div className='container'>
+    <div className='recommendContainer'>
         <div className='heading'>
             <span className='recommendedPlace'>Recommended Places</span>
             <span className='showAllButton'>Show All</span>
