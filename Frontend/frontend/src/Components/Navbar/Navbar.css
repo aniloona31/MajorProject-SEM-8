@@ -72,7 +72,7 @@
     display: flex;
     flex-direction: row;
     padding: 15px 20px 15px 20px;
-    background-color: #EEEEEE;
+    background-color: rgb(245,245,245);
     align-items: center;
     cursor: pointer;
 }

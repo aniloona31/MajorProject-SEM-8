@@ -1,0 +1,25 @@
+.container{
+    padding: 20px 20px 20px 20px;
+}
+
+.heading{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.recommendedPlace{
+    font-size: x-large;
+    font-weight: 700;
+    color: rgb(51,51,51);
+}
+
+.showAllButton{
+    font-weight: 500;
+    color: rgb(7,7,173);
+    cursor: pointer;
+}
+

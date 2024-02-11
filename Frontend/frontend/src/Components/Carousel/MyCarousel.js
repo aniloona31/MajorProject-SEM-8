@@ -20,7 +20,7 @@ const homeImages = [
 
 function MyCarousel() {
     return (
-        <Carousel autoPlay={true} 
+        <Carousel className="carousel" autoPlay={true} 
             infiniteLoop={true} 
             interval={3000} 
             stopOnHover={true} 
@@ -33,8 +33,9 @@ function MyCarousel() {
             {homeImages?.map((item) => {
                 return(
                     <div key={item.placeName} className='image'>
-                        <img alt='Not Available' src={item.image}/>
+                        <img className="carouselImage" alt='Not Available' src={item.image}/>
                         <p className='placeName'>{item.placeName}</p>
+                        {/* <p>lorem ipsum</p> */}
                     </div>
                 )
             })}

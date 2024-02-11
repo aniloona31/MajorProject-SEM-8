@@ -1,14 +1,14 @@
 
-img{
+.carouselImage{
     object-fit: fill;
-    max-height: 400px;
+    max-height: 350px;
     min-height: 50px;
     position: relative;
 }
 
 .placeName{
     position: absolute;
-    top: 300px;;
+    top: 250px;;
     font-weight: 500;
     font-size: x-large;
     color: white;
@@ -16,4 +16,11 @@ img{
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: rgba(0,0,0,0.5);
+}
+
+.carousel{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgb(235, 235, 235);
+    border: 2px solid #EEEEEE;
 }
