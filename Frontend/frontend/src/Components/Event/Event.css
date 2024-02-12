@@ -1,0 +1,20 @@
+.eventContainer{
+    /* padding: 40px 40px 40px 40px; */
+    padding-left: 50px;
+    padding-bottom: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    background-color: #2B3149;
+}
+
+.eventCards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.eventHeading{
+    color: white;
+    font-weight: 700;
+    font-size: x-large;
+}

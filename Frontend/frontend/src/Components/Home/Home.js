@@ -3,6 +3,10 @@ import './Home.css'
 import Navbar from '../Navbar/Navbar'
 import Carousel from '../Carousel/MyCarousel'
 import Recommended from '../Recommended/Recommended'
+import Advertisement from '../Advertisment/Advertisement'
+import Footer from '../Footer/Footer'
+import Event from '../Event/Event'
+import TopReviews from '../TopReviews/TopReviews'
 
 function Home() {
   return (
@@ -10,6 +14,10 @@ function Home() {
       <Navbar/>
       <Carousel/>
       <Recommended/>
+      <Advertisement/>
+      <Event/>
+      <TopReviews/>
+      <Footer/>
     </div>
   )
 }

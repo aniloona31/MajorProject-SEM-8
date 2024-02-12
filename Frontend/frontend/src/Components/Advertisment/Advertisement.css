@@ -1,0 +1,25 @@
+.adContainer{
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(245,245,245);
+}
+
+.adImage{
+    width: 100%;
+    height: 120px;
+    border-radius: 15px;
+    object-fit: cover;
+    position: relative;
+}
+
+.adText{
+    position: absolute;
+    bottom: -373px;
+    font-size: xx-large;
+    font-weight: 700;
+}
