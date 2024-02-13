@@ -1,0 +1,22 @@
+.topReviewsContainer {
+    width: 100%;
+    height: 70vh;
+    color: #2B3149;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(245,245,245);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.topReviewsDescription {
+    text-align: center;
+    width: 43%;
+    margin-bottom: 2px;
+}
