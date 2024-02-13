@@ -20,3 +20,13 @@ h2 {
     width: 43%;
     margin-bottom: 2px;
 }
+
+@media screen and (max-width:700px) {
+    .topReviewsContainer {
+        height: auto;
+    }
+
+    .topReviewsDescription {
+        width: 90%;
+    }
+}

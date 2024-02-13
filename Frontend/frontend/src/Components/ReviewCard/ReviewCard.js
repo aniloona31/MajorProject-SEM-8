@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as faFaStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faRaStar} from '@fortawesome/free-regular-svg-icons'
 
-function ReviewCard() {
+function ReviewCard({review}) {
   return (
     <div class="reviewSection">
             <div class="reviewItem">
