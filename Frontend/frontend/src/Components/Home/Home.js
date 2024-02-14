@@ -11,13 +11,11 @@ import TopReviews from '../TopReviews/TopReviews'
 function Home() {
   return (
     <div className='homeContainer'>
-      <Navbar/>
       <Carousel/>
       <Recommended/>
       <Advertisement/>
       <Event/>
       <TopReviews/>
-      <Footer/>
     </div>
   )
 }

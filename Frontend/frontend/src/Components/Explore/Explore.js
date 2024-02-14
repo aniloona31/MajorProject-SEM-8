@@ -1,0 +1,115 @@
+import React from 'react'
+import './Explore.css'
+import Cities from '../../Utils/Cities';
+import { useParams } from 'react-router-dom';
+import Card from '../Card/Card';
+
+const places = [
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+    {
+        placeName : "Qutub Minar",
+        rating : "4.5",
+        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
+        category : "History"
+    },
+];
+
+const categories = [];
+
+function Explore() {
+
+  const {city} = useParams();
+
+  return (
+    <>
+        {Cities.find((item) => {return (item===city)}) == undefined
+        ? 
+        <div className='invalidPlaceContainer'>
+            <p>place doesn't exist</p>
+        </div>
+        :
+        <div className='exploreContainer'>
+            <div className='filterContainer'>
+                <h1>Filter</h1>
+                <div>
+                    <h3>Category</h3>
+                    <div>
+                        {categories?.map((category) => {
+                            return(
+                                <button>{category}</button>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+            <div className='placesContainer'>
+                <h1>Places In {city}</h1>
+                <div className='allPlaces'>
+                    {places?.map((place) => {
+                        return(
+                            <div className='eachPlace'>
+                                <Card key={place.placeName} place={place}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </div>}
+    </>
+  )
+}
+
+export default Explore
