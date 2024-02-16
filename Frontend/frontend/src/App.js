@@ -5,6 +5,7 @@ import Home from './Components/Home/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar/Navbar';
 import Place from './Components/Place/Place';
+import ErrorPage from './Components/ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/Home' element={<Home/>}/>
           <Route path='/explore/places/:city' element={<Explore/>}/>
           <Route path='/:city/place/:placeName' element={<Place/>}/>
+          <Route path='*' element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
       <Footer/>
