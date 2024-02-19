@@ -1,6 +1,20 @@
 spring:
   application:
     name: api-gateway
+
+  cloud:
+    gateway:
+      defaultFilters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
 server:
   port: 8765
 springdoc:
