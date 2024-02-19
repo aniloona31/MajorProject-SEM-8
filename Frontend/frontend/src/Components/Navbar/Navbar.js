@@ -3,6 +3,7 @@ import './Navbar.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-dropdown-select'
+import { useNavigate } from 'react-router-dom'
 
 const options = [
     { 
@@ -23,7 +24,8 @@ const options = [
 function Navbar() {
   
   const [option, setOption] = useState(options[0]);
-  
+  const navigate = useNavigate();
+
   return (
     <div className='navbarContainer'>
         <div className='searchBar'>
@@ -36,7 +38,7 @@ function Navbar() {
             </div>
             <div className='rightElements'>
                 <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={options} onChange={(values)=>{setOption(values[0]['label'])}} value={option} placeholder="Select An Option"/>
-                <button className='signInButton'>Sign in</button>
+                <button onClick={() => {navigate("/sign-in")}} className='signInButton'>Sign in</button>
                 <div className='myProfile'>
                     <span>My Profile</span>
                 </div>

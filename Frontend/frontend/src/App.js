@@ -12,8 +12,8 @@ import SignUp from './Components/SignUp/SignUp';
 function App() {
   return (
     <div className='appWrapper'>
-      <Navbar/>
       <BrowserRouter>
+        <Navbar/>
         <Routes>
           <Route path='/sign-in' element={<SignIn/>}/>
           <Route path='/sign-up' element={<SignUp/>}/>
@@ -22,8 +22,8 @@ function App() {
           <Route path='/:city/place/:placeName' element={<Place/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
+        <Footer/>
       </BrowserRouter>
-      <Footer/>
     </div>
   );
 }

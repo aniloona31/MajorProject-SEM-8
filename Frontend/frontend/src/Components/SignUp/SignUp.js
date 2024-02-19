@@ -1,13 +1,43 @@
 import React, { useState } from 'react'
 import './SignUp.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
+  const signUp = (e) => {
+    e.preventDefault();
+    const url = process.env.REACT_APP_ROOT_URL + "/auth/register";
+    axios.post(url, {email, password})
+    .then((res) => {
+     if(res.status === 201){
+        notify(res.data)
+        navigate("/sign-in")
+     }else{
+        notify("Error while adding user","success")
+     }   
+    })
+    .catch((error) => {notify("Error while adding user","error")})
+  }
+
+  const notify = (msg, type) =>{
+    if(type === "success"){
+        toast.success(msg);
+    }else{
+        toast.error(msg);
+    }
+  }
+
   return (
     <div className="signup-container">
+        <ToastContainer/>
             <form className="signup-form">
                 <h1>Welcome Back</h1>
                 <p>Please Signup your account</p>
@@ -17,7 +47,7 @@ function SignUp() {
                 <div className="input-group">
                     <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} name="password" placeholder="Password" required />
                 </div>
-                <button className='signupButton' type="submit">Signup</button>
+                <button onClick={signUp} className='signupButton' type="submit">Signup</button>
             </form>
         </div>
   )
