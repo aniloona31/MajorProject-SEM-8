@@ -3,6 +3,7 @@ import './Explore.css'
 import Cities from '../../Utils/Cities';
 import { useParams } from 'react-router-dom';
 import Card from '../Card/Card';
+import categories from '../../Utils/Categories';
 
 const places = [
     {
@@ -52,33 +53,27 @@ const places = [
         rating : "4.5",
         imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
         category : "History"
-    },
-    {
-        placeName : "Qutub Minar",
-        rating : "4.5",
-        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
-        category : "History"
-    },
-    {
-        placeName : "Qutub Minar",
-        rating : "4.5",
-        imageUrl : "https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg",
-        category : "History"
-    },
+    }
 ];
 
-const categories = [];
 
 function Explore() {
 
-  const {city} = useParams();
+  const {city, category} = useParams();
+  console.log(city, category)
 
   return (
-    <>
+    <div className='exploreTopContainer'>
         {Cities.find((item) => {return (item===city)}) == undefined
         ? 
         <div className='invalidPlaceContainer'>
             <p>place doesn't exist</p>
+        </div>
+        :
+        categories.find((item) => {return (item === category || category === "places")}) == undefined 
+        ?
+        <div className='invalidPlaceContainer'>
+            <p>Category doesn't exist</p>
         </div>
         :
         <div className='exploreContainer'>
@@ -96,7 +91,7 @@ function Explore() {
                 </div>
             </div>
             <div className='placesContainer'>
-                <h1>Places In {city}</h1>
+                <h1>{category} In {city}</h1>
                 <div className='allPlaces'>
                     {places?.map((place) => {
                         return(
@@ -108,7 +103,7 @@ function Explore() {
                 </div>
             </div>
         </div>}
-    </>
+    </div>
   )
 }
 

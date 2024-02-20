@@ -3,9 +3,11 @@ package com.major.sem8.service;
 import com.major.sem8.config.CustomUserDetailsServiceImpl;
 import com.major.sem8.dto.AuthRequest;
 import com.major.sem8.entity.User;
+import com.major.sem8.exception.ApplicationException;
 import com.major.sem8.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -65,7 +67,7 @@ public class AuthService {
     }
 
     public String login(AuthRequest loginRequest) {
-        User user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(()->new RuntimeException("user doesn't exist"));
+        User user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(()->new ApplicationException("user doesn't exist",  HttpStatus.BAD_REQUEST));
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(user.getEmail());

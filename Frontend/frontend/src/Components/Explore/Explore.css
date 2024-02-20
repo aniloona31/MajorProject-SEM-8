@@ -8,6 +8,10 @@
     border: 4px solid rgb(235,235,235);
 }
 
+.exploreTopContainer{
+    height: 145vh;
+}
+
 .filterContainer{
     flex: 1;
 }

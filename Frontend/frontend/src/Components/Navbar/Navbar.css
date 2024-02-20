@@ -37,6 +37,7 @@
     font-weight: 600;
     color: rgb(7, 7, 173);
     font-size: x-large;
+    cursor: pointer;
 }
 
 .centreElements>input{

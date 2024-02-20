@@ -9,6 +9,7 @@ function SignUp() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   const navigate = useNavigate();
 
@@ -42,10 +43,13 @@ function SignUp() {
                 <h1>Welcome Back</h1>
                 <p>Please Signup your account</p>
                 <div className="input-group">
-                    <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" placeholder="email" required />
+                    <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" placeholder="Email" required />
                 </div>
                 <div className="input-group">
                     <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} name="password" placeholder="Password" required />
+                </div>
+                <div className="input-group">
+                    <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} value={username} name="username" placeholder="Username" required />
                 </div>
                 <button onClick={signUp} className='signupButton' type="submit">Signup</button>
             </form>
