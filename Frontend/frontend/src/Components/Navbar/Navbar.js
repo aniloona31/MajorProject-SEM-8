@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
+import {faCircleInfo, faMagnifyingGlass, faQuestion, faRightFromBracket, faTicket, faUser} from '@fortawesome/free-solid-svg-icons'
 import Select from 'react-dropdown-select'
 import { useNavigate } from 'react-router-dom'
 import categories from '../../Utils/Categories'
@@ -33,6 +33,11 @@ function Navbar() {
     navigate(`/explore/${category}/${option.label}`);
   }
 
+  const profileClick = () => {
+    let menu = document.querySelector('.menu');
+    menu.classList.toggle('active');
+  }
+
   return (
     <div className='navbarContainer'>
         <div className='searchBar'>
@@ -46,9 +51,23 @@ function Navbar() {
             <div className='rightElements'>
                 <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={options} onChange={(values)=>{setOption(values[0]['label'])}} value={option} placeholder={option.label}/>
                 {localStorage.getItem('token') == null? <button onClick={() => {navigate("/sign-in")}} className='signInButton'>Sign in</button> : <></>}
-                {localStorage.getItem('token') ? <div className='myProfile'>
-                    <span>My Profile</span>
-                </div> : <></>}
+                {localStorage.getItem('token') 
+                ?
+                <div onClick={() => profileClick()} className='profile'>
+                  <div class="img-box">
+                      <img src="https://i.postimg.cc/BvNYhMHS/user-img.jpg" alt="some user image" />
+                  </div>
+                  <div class="menu">
+                      <ul>
+                          <li><span onClick={}><FontAwesomeIcon icon={faUser} />&nbsp;Profile</span></li>
+                          <li><span onClick={}><FontAwesomeIcon icon={faTicket} />&nbsp;Tickets</span></li>
+                          <li><span onClick={}><FontAwesomeIcon icon={faQuestion} />&nbsp;Q&A</span></li>
+                          <li><span onClick={}><FontAwesomeIcon icon={faCircleInfo} />&nbsp;Help</span></li>
+                          <li><span onClick={}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp;Sign Out</span></li>
+                      </ul>
+                  </div>
+              </div>
+            : <></>}
             </div>
         </div>
         <div className='optionBar'>
