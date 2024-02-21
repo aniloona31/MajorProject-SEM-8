@@ -8,6 +8,7 @@ import Place from './Components/Place/Place';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import SignIn from './Components/SignIn/SignIn';
 import SignUp from './Components/SignUp/SignUp';
+import Tickets from './Components/Tickets/Tickets';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/Home' element={<Home/>}/>
           <Route path='/explore/:category/:city' element={<Explore/>}/>
           <Route path='/:city/place/:placeName' element={<Place/>}/>
+          <Route path='/my-tickets' element={<Tickets/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer/>

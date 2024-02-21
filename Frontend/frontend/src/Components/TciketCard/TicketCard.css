@@ -1,0 +1,104 @@
+.ticket {
+	padding: 20px 20px 20px 20px;
+	display: flex;
+	background: white;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    height: 210px;
+    width: 750px;
+}
+
+.left {
+	display: flex;
+}
+
+.ticketImage>img {
+	height: 210px;
+	width: 220px;
+	opacity: 0.85;
+    position: relative;
+}
+
+.ticket-info {
+	padding-left: 20px;
+    padding-right: 20px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: space-between;
+	align-items: center;
+    height: 210px;
+    font-size: 10px 30px;
+}
+
+.date {
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 5px 0;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.date span {
+	width: 100px;
+}
+
+.date span:first-child {
+	text-align: left;
+}
+
+.date span:last-child {
+	text-align: right;
+}
+
+.date .june-29 {
+	color: rgb(7,7,173);
+	font-size: 15px;
+}
+
+.location {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	padding-top: 8px;
+	border-top: 1px solid gray;
+}
+
+.location .separator {
+	font-size: 10px;
+}
+
+.right {
+	width: 180px;
+	border-left: 1px dashed #404040;
+}
+
+
+.right .right-info-container {
+	height: 220px;
+	padding: 10px 10px 10px 35px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.barcode {
+	height: 180px;
+}
+
+.barcode img {
+	height: 100%;
+}
+
+.right .ticket-number {
+	color: gray;
+}
+
+.show-name{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(7,7,173);
+}
