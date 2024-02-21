@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Explore.css'
 import Cities from '../../Utils/Cities';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import categories from '../../Utils/Categories';
+import { useStateValue } from '../../Context/StateProvider';
 
 const places = [
     {
@@ -59,8 +60,14 @@ const places = [
 
 function Explore() {
 
-  const {city, category} = useParams();
-  console.log(city, category)
+  const[{city},dispatch] = useStateValue();
+  const {category} = useParams();
+  const navigate = useNavigate();
+//   console.log(category)
+
+  useEffect(()=>{
+    navigate(`/explore/${category}/${city}`);
+  },[city])
 
   return (
     <div className='exploreTopContainer'>

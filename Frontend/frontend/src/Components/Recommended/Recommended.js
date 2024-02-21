@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Recommended.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,6 +10,8 @@ import 'swiper/css/pagination';
 
 import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules';
 import Card from '../Card/Card';
+import { useStateValue } from '../../Context/StateProvider';
+import { useNavigate } from 'react-router-dom';
 
 const topPlaces = [
     {
@@ -75,11 +77,19 @@ const topPlaces = [
 ]
 
 function Recommended() {
+
+  const[{city},dispatch] = useStateValue();
+  const navigate = useNavigate();
+  
+  const goToPlaces = () =>{
+    navigate(`/explore/places/${city}`)
+  }
+  
   return (
     <div className='recommendContainer'>
         <div className='heading'>
             <span className='recommendedPlace'>Recommended Places</span>
-            <span className='showAllButton'>Show All</span>
+            <span onClick={() => goToPlaces()} className='showAllButton'>Show All</span>
         </div>
         <Swiper
         centeredSlides={false}

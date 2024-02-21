@@ -5,6 +5,7 @@ import {faCircleInfo, faMagnifyingGlass, faQuestion, faRightFromBracket, faTicke
 import Select from 'react-dropdown-select'
 import { useNavigate } from 'react-router-dom'
 import categories from '../../Utils/Categories'
+import { useStateValue } from '../../Context/StateProvider'
 
 const options = [
     { 
@@ -25,17 +26,29 @@ const options = [
 
 function Navbar() {
   
-  const [option, setOption] = useState(options[0]);
+  const[{city},dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const goToExplore = (category) => {
     console.log("category clicked")
-    navigate(`/explore/${category}/${option.label}`);
+    navigate(`/explore/${category}/${city}`);
   }
 
   const profileClick = () => {
     let menu = document.querySelector('.menu');
     menu.classList.toggle('active');
+  }
+
+  const signOut = () =>{
+    localStorage.clear('token');
+    navigate("/Home");
+  }
+
+  const setCity = (values) =>{
+    dispatch({
+        type: "SET_CITY",
+        payload: values[0]['label']
+    })
   }
 
   return (
@@ -49,7 +62,7 @@ function Navbar() {
                 <input type='text' placeholder='Search for Place'/>
             </div>
             <div className='rightElements'>
-                <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={options} onChange={(values)=>{setOption(values[0]['label'])}} value={option} placeholder={option.label}/>
+                <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={options} onChange={(values)=>{setCity(values)}} value={city} placeholder={city}/>
                 {localStorage.getItem('token') == null? <button onClick={() => {navigate("/sign-in")}} className='signInButton'>Sign in</button> : <></>}
                 {localStorage.getItem('token') 
                 ?
@@ -60,10 +73,10 @@ function Navbar() {
                   <div class="menu">
                       <ul>
                           <li><span onClick={()=>{}}><FontAwesomeIcon icon={faUser} />&nbsp;Profile</span></li>
-                          <li><span onClick={()=>{}}><FontAwesomeIcon icon={faTicket} />&nbsp;Tickets</span></li>
+                          <li><span onClick={()=>{navigate("/my-tickets")}}><FontAwesomeIcon icon={faTicket} />&nbsp;Tickets</span></li>
                           <li><span onClick={()=>{}}><FontAwesomeIcon icon={faQuestion} />&nbsp;Q&A</span></li>
                           <li><span onClick={()=>{}}><FontAwesomeIcon icon={faCircleInfo} />&nbsp;Help</span></li>
-                          <li><span onClick={()=>{}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp;Sign Out</span></li>
+                          <li><span onClick={()=>{signOut()}}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp;Sign Out</span></li>
                       </ul>
                   </div>
               </div>
