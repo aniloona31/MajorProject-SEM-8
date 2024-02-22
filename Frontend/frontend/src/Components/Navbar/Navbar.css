@@ -154,6 +154,7 @@
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
+    z-index: 1;
 }
 
 /* menu links */
@@ -162,7 +163,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    z-index: 10000;
     background: #fff;
 }
 

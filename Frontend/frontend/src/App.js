@@ -9,6 +9,7 @@ import ErrorPage from './Components/ErrorPage/ErrorPage';
 import SignIn from './Components/SignIn/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Tickets from './Components/Tickets/Tickets';
+import PostReview from './Components/PostReview/PostReview';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/explore/:category/:city' element={<Explore/>}/>
           <Route path='/:city/place/:placeName' element={<Place/>}/>
           <Route path='/my-tickets' element={<Tickets/>}/>
+          <Route path='/review/:ticketId' element={<PostReview/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer/>

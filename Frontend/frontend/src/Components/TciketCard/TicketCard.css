@@ -86,7 +86,7 @@
 }
 
 .barcode {
-	height: 180px;
+	height: 175px;
 }
 
 .barcode img {
@@ -101,4 +101,11 @@
     font-size: 15px;
     font-weight: 500;
     color: rgb(7,7,173);
+}
+
+.reviewButton{
+    justify-content: flex-end;
+    color: rgb(7, 7, 173);
+    font-weight: 700;
+    cursor: pointer;
 }

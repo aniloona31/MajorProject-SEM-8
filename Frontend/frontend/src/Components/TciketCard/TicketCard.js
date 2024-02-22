@@ -1,7 +1,15 @@
 import React from 'react'
 import './TicketCard.css'
+import { useNavigate } from 'react-router-dom';
 
 function TicketCard() {
+
+  const navigate = useNavigate();
+
+  const addReview = () =>{
+    navigate("/review/11232-1232")
+  }
+
   return (
     <div className="ticket created-by-anniedotexe">
       <div className="left">
@@ -24,6 +32,7 @@ function TicketCard() {
       </div>
       <div className="right">
         <div className="right-info-container">
+          <span onClick={() => addReview()} className='reviewButton'>Add Review</span>
           <div className="barcode">
             <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code"/>
           </div>
