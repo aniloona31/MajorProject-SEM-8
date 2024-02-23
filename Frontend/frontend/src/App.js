@@ -23,7 +23,6 @@ function App() {
           <Route path='/explore/:category/:city' element={<Explore/>}/>
           <Route path='/:city/place/:placeName' element={<Place/>}/>
           <Route path='/my-tickets' element={<Tickets/>}/>
-          <Route path='/review/:ticketId' element={<PostReview/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer/>

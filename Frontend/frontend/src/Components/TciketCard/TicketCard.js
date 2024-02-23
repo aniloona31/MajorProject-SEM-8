@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './TicketCard.css'
-import { useNavigate } from 'react-router-dom';
+import PostReview from '../PostReview/PostReview';
 
 function TicketCard() {
 
-  const navigate = useNavigate();
-
+  const[review,setReview] = useState(false);
   const addReview = () =>{
-    navigate("/review/11232-1232")
+    setReview(!review);
   }
 
   return (
+    <>
+    {review && <PostReview addReview={addReview}/>}
     <div className="ticket created-by-anniedotexe">
       <div className="left">
         <div className="ticketImage">
@@ -42,6 +43,7 @@ function TicketCard() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './PostReview.css'
-import { faImages } from '@fortawesome/free-solid-svg-icons'
+import { faImages, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function PostReview() {
+function PostReview({addReview}) {
+
+    const [images, setImages] = useState([]);
+
+    const appendImage = (e) =>{
+        setImages([...images,e.target.files[0]]);
+    }
+
+    const submitForm = (e) =>{
+        e.preventDefault();
+        console.log(images);
+        addReview();
+    }
+
     return (
         <div className='mainWrapper'>
             <div className='mainReviewContainer'>
                 <div className="postReviewContainer">
                     <div className="postReviewTitle">Rate your experience</div>
+                    <span onClick={() => {addReview()}}><FontAwesomeIcon style={{cursor:"pointer", position:"fixed", top:"125px", right:"290px", height:"25px", width:"25px"}} icon={faXmark} /></span>
                     <div className="postReviewContent">We highly value your feedback! Kindly take a moment to rate your experience and provide us with your valuable feedback.</div>
                     <div className="rate-box">
                         <input type="radio" name="star" id="star0" />
@@ -27,12 +41,19 @@ function PostReview() {
                 <div className='lowerPart'>
                     <div className="upload__box">
                             <label className="upload__btn">
-                                <span className='uploadFont'><FontAwesomeIcon style={{height:"50px", width:"30px"}} icon={faImages} /></span>
-                                <input type="file" multiple="" data-max_length="20" className="upload__inputfile" />
+                                <span className='uploadFont'><FontAwesomeIcon style={{height:"50px", width:"40px"}} icon={faImages} /></span>
+                                <input onChange={(e) => appendImage(e)} type="file" accept='image/*' multiple data-max_length="20" className="upload__inputfile" />
+                                {images?.map((image) => {
+                                    return(
+                                        <img src={URL.createObjectURL(image)} style={{marginLeft:"15px", height:"50px", width:"50px", contain:"content"}}/>
+                                    )
+                            })}
                             </label>
-                        <div className="upload__img-wrap"></div>
+                        <div className="upload__img-wrap">
+            
+                        </div>
                     </div>
-                    <div className="postReviewSubmitBtn">Send</div>
+                    <div onClick={submitForm} className="postReviewSubmitBtn">Send</div>
                 </div>
             </div>
         </div>
