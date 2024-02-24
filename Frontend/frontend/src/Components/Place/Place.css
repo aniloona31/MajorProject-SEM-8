@@ -1,0 +1,37 @@
+.placeContainer{
+    height: 100vh;
+    /* padding: 20px 20px 20px 20px; */
+}
+
+.placeCard{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 310px;
+    padding-top: 30px;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: linear-gradient(90deg, #1A1A1A 24.97%, #1A1A1A 38.3%, rgba(208, 199, 199, 0.041) 97.47%, #1A1A1A 100%), url(https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg);
+}
+
+.leftPlace{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leftPlace>img{
+    border-radius: 15px;
+}
+
+
+
+.rightPlace{
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

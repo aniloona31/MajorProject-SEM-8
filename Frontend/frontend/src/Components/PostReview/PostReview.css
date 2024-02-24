@@ -97,7 +97,7 @@ textarea {
     color: inherit;
     font-family: inherit;
     line-height: 1.5;
-    border-radius: 0.2rem;
+    border-radius: 10px;
     box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3), inset -2px -2px 8px rgba(255, 255, 255, 0.8);
     background-color: rgba(255, 255, 255, 0.3);
 }
