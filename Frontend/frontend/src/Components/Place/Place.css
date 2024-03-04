@@ -1,5 +1,5 @@
 .placeContainer{
-    height: 100vh;
+    height: 100%;
     /* padding: 20px 20px 20px 20px; */
 }
 
@@ -12,7 +12,7 @@
     color: white;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: linear-gradient(90deg, #1A1A1A 24.97%, #1A1A1A 38.3%, rgba(208, 199, 199, 0.041) 97.47%, #1A1A1A 100%), url(https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg);
+    background-image: linear-gradient(90deg, #1A1A1A 24.97%, #1A1A1A 38.3%, rgba(12, 12, 12, 0.041) 97.47%, #1A1A1A 100%), url(https://images.pexels.com/photos/13385089/pexels-photo-13385089.jpeg?cs=srgb&dl=pexels-sanjay-kareer-13385089.jpg&fm=jpg);
 }
 
 .leftPlace{
@@ -35,3 +35,80 @@
     justify-content: flex-start;
     align-items: flex-start;
 }
+
+.placeNamePage{
+    font-size: xx-large;
+    font-weight: 500;
+    color: white;
+}
+
+.placeRating, .placeAddress{
+    font-size: x-large;
+    font-weight: 400;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.bookButton{
+    cursor: pointer;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgb(7,7,173);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: medium;
+    font-weight: 300;
+}
+
+.bookButton:hover{
+    opacity: 0.7;
+}
+
+.lowerCard{
+    padding: 20px 20px 20px 20px;
+}
+
+.aboutTheMovie{
+    font-size: x-large;
+    font-weight: 700;
+    padding-bottom: 20px;
+}
+
+.photoss{
+    font-size: x-large;
+    font-weight: 700;
+    /* padding-bottom: 20px; */
+}
+
+section {
+    --childs: 5;
+    --gap: 10px;
+    /* background: black; */
+    /* border: 10px solid; */
+    width: min(80%, 800px);
+    display: flex;
+    gap: var(--gap);
+  }
+  
+  .box {
+    width: calc((100% / var(--childs)));
+    box-sizing: border-box;
+    height: min(30vmin, 120px);
+    background-color: white;
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: width 300ms 50ms ease-in-out;
+  }
+  
+  .box:hover {
+    width: calc((100% / (var(--childs) - 2)));
+  }
+  
+  section:has(.box:hover) .box:not(:hover) {
+    width: calc((100% / (var(--childs) + 1)));
+  }
