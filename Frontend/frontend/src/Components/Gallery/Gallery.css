@@ -1,0 +1,98 @@
+.galleryContainer{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.7);
+    overflow-y: scroll;
+}
+
+.gallery {
+    --anim-time--hi: 266ms;
+    --anim-time--med: 400ms;
+    --anim-time--lo: 600ms;
+
+    display: flex;
+    place-content: center;
+    /* max-width: clamp(30rem, 95%, 50rem); */
+    width: 70%;
+    min-height: 100vh;
+    margin-inline: auto;
+    /* padding: clamp(0px, (30rem  - 100vw) * 9999, 1rem); */
+   
+}
+
+.gallery__content--flow {
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 1rem; */
+}
+
+.gallery__content--flow > *  {
+    flex-grow: 1;
+    flex-basis: calc((30rem - 100% - 1rem) * 999);
+}
+
+figure {
+    display: flex;
+    min-width: 220px;
+    max-height: 220px;
+    position: relative;
+    border-radius: .35rem;
+    box-shadow:
+    rgb(40, 40, 40, 0.1) 0px 2px 3px,
+    rgb(20, 20, 20, 0.2) 0px 5px 8px,
+    rgb(0, 0, 0, 0.25) 0px 10px 12px;
+    overflow: hidden;
+    transition: transform var(--anim-time--med) ease;
+    margin: 10px 10px 10px 10px;
+}
+
+figure::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        hsla(0, 0%, 0%, 0.8) 0%,
+        hsla(0, 0%, 0%, 0.7) 12%,
+        hsla(0, 0%, 0%, 0.2) 41.6%,
+        hsla(0, 0%, 0%, 0.125) 50%,
+        hsla(0, 0%, 0%, 0.01) 59.9%,
+        hsla(0, 0%, 0%, 0) 100%
+    );
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-duration: var(--anim-time--med), var(--anim-time--med);
+    transition-timing-function: ease, ease;
+      z-index: 4;
+}
+
+
+figure:hover::before {
+    opacity: 0.8;
+}
+
+figure:hover .header__caption {
+    transform: translateY(0);
+    opacity: 1;
+}
+figure:hover img{
+    transform: scale(1);
+}
+.title {
+    color: #fff;
+    
+}
+
+.galleryImage{
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+  transform: scale(1.15);
+    aspect-ratio: 16 / 13;
+    transition: 400ms ease-in-out;
+}
