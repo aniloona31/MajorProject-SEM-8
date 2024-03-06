@@ -4,8 +4,15 @@ import { useParams } from 'react-router-dom'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Gallery from '../Gallery/Gallery';
+import ReviewCard from '../ReviewCard/ReviewCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules';
 
 const reviews = [
+    { "review": "yooy" },
+    { "review": "yooy" },
+    { "review": "yooy" },
+    { "review": "yooy" },
     { "review": "yooy" }
 ];
 
@@ -22,13 +29,13 @@ function Place() {
     const { city, placeName } = useParams();
     const [viewGallery, setViewGallery] = useState(false);
 
-    const changeViewGallery = () =>{
+    const changeViewGallery = () => {
         setViewGallery(!viewGallery);
     }
 
     return (
         <>
-            {viewGallery === true ? <Gallery changeViewGallery={changeViewGallery}/> : <></>}
+            {viewGallery === true ? <Gallery changeViewGallery={changeViewGallery} /> : <></>}
             <div className='placeContainer'>
                 <div className='placeCard'>
                     <div className='leftPlace'>
@@ -60,7 +67,7 @@ function Place() {
                             {photos?.map((photo, i) => {
                                 if (i === photos.length - 1) {
                                     return (
-                                        <div onClick={() => {changeViewGallery()}} style={{ backgroundColor: "grey", backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png)` }} className={`box box-${i}`}></div>
+                                        <div onClick={() => { changeViewGallery() }} style={{ backgroundColor: "grey", backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png)` }} className={`box box-${i}`}></div>
                                     )
                                 } else {
                                     return (
@@ -71,7 +78,8 @@ function Place() {
                         </section>
                     </div>
                     <div className='reviews'>
-                        {reviews?.map((review) => {
+                        <p className='photoss'>Customer Reviews</p>
+                        {/* {reviews?.map((review) => {
                             return (
                                 <div className='placeReview'>
                                     <span>4 <p>hey this is my review</p></span>
@@ -79,9 +87,37 @@ function Place() {
                                 </div>
                             )
                         })}
-                        {reviews.length > 3 ? <button className='allReviewsButton'>Show All Reviews</button> : <></>}
+                        {reviews.length > 3 ? <button className='allReviewsButton'>Show All Reviews</button> : <></>} */}
+                        <div className='reviewSwipper'>
+                            <Swiper
+                                centeredSlides={false}
+                                grabCursor={true}
+                                keyboard={{
+                                    enabled: true,
+                                }}
+                                breakpoints={{
+                                    769: {
+                                        slidesPerView: 3,
+                                        slidesPerGroup: 3,
+                                    },
+                                }}
+                                Scrollbar={false}
+                                navigation={true}
+                                pagination={false}
+                                modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+                                className="reviewSwipper"
+                                style={{ "padding-left": "25px" }}
+                            >
+                                {reviews?.map((review) => {
+                                    return (
+                                        <SwiperSlide>
+                                            <ReviewCard />
+                                        </SwiperSlide>
+                                    )
+                                })}
+                            </Swiper>
+                        </div>
                     </div>
-                    <p>{city}</p>
                 </div>
             </div>
         </>

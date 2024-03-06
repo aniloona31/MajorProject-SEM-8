@@ -112,3 +112,10 @@ section {
   section:has(.box:hover) .box:not(:hover) {
     width: calc((100% / (var(--childs) + 1)));
   }
+
+  .reviewSwipper{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    /* left: 0px; */
+  }
