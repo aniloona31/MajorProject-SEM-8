@@ -49,6 +49,7 @@ public class PaymentService {
             paymentDetails.setRazorpayOrderId(orderId);
             paymentDetails.setTicketId(ticket.getTicketId());
             paymentDetails.setPaymentStatus(PaymentStatus.PENDING.name());
+            paymentDetails.setPrice(ticket.getPrice());
             paymentRepository.save(paymentDetails);
         }catch (Exception e){
             throw new ApplicationException("ERROR WHILE GETTING ORDERID FROM RAZORPAY", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,4 +90,30 @@ public class PaymentService {
                         sr.getProducerRecord().value()));
     }
 
+    public Payment getOrderId(String ticketId) {
+
+        for (int i = 0; i < 180; i++) {
+            try {
+                // Simulate database check
+                Thread.sleep(1000);
+                // If new data is found, send it to the client
+                Payment order = isNewDataAvailable(ticketId);
+                if (order != null) {
+                    return order;
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        throw new ApplicationException("error while getting orderId",HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    protected Payment isNewDataAvailable(String ticketId){
+        Payment payment = paymentRepository.findByTicketId(ticketId);
+        if(payment != null){
+            return payment;
+        }else{
+            return null;
+        }
+    }
 }

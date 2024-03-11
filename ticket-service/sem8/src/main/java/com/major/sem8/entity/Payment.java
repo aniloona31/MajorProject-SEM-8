@@ -19,4 +19,5 @@ public class Payment {
 
     private String razorpayOrderId;
 
+    private Double price;
 }

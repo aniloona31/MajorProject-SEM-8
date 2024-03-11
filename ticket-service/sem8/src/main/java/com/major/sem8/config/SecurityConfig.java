@@ -23,7 +23,7 @@ public class SecurityConfig {
                         .requestMatchers("/ticket/**","/ticket-service/v3/api-docs/**","/ticket-service/swagger-ui/**")
 //                        .access(hasIpAddress("127.0.0.1"))
 //                        .anyRequest()
-                        .authenticated()).build();
+                        .permitAll()).build();
     }
 
     private static AuthorizationManager<RequestAuthorizationContext> hasIpAddress(String ipAddress) {
