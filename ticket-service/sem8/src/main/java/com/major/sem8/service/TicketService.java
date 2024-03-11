@@ -4,7 +4,7 @@ import com.major.sem8.entity.Payment;
 import com.major.sem8.dto.TicketResponse;
 import com.major.sem8.entity.Ticket;
 import com.major.sem8.exception.ApplicationException;
-import com.major.sem8.proxy.PlaceProxy;
+import com.major.sem8.proxy.NewPlaceProxy;
 import com.major.sem8.repository.TicketRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class TicketService {
     private TicketRepository ticketRepository;
 
     @Autowired
-    private PlaceProxy placeProxy;
+    private NewPlaceProxy placeProxy;
 
     @Autowired
     private KafkaTemplate<String,Ticket> kafkaTemplate;

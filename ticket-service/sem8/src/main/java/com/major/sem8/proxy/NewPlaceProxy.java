@@ -5,9 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//@FeignClient(name = "place-service",url = "http://localhost:9091")
-@FeignClient(name = "place-service")
-public interface PlaceProxy {
+@FeignClient("place-service")
+public interface NewPlaceProxy {
 
     @GetMapping("/place/price")
     public ResponseEntity<Double> getPrice(@RequestParam("placeId") Long placeId);
