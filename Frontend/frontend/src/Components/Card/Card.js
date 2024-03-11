@@ -1,10 +1,13 @@
 import React from 'react'
 import './Card.css'
+import { useNavigate } from 'react-router-dom'
 
 function Card({place}) {
 
+  const navigate = useNavigate();
+
   return (
-    <div className='card'>
+    <div onClick={() => {navigate("/Mumbai/place/hanuman-mandir")}} className='card'>
         <img className="cardImage" src={place.imageUrl}/>
         <div className='cardContent'>
             <span className='cardRating'>{place.rating}</span>

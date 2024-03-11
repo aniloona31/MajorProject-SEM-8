@@ -3,6 +3,7 @@ import './SignIn.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import { useStateValue } from '../../Context/StateProvider'
 
 function SignIn() {
 
@@ -26,6 +27,7 @@ function SignIn() {
         ).then((res) => {
             localStorage.setItem('token',res.data);
             toast.success("Login Successful")
+            localStorage.setItem('email',email);
             navigate('/Home');
         }).catch((error) => {
             if(error.code === "ERR_BAD_REQUEST")

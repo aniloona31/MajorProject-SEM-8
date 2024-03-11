@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Place.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Gallery from '../Gallery/Gallery';
@@ -26,11 +26,17 @@ const photos = [
 
 function Place() {
 
-    const { city, placeName } = useParams();
+    const { city, placeName, placeId } = useParams();
+    const navigate = useNavigate();
     const [viewGallery, setViewGallery] = useState(false);
 
     const changeViewGallery = () => {
         setViewGallery(!viewGallery);
+    }
+
+    const bookTicket = (e) =>{
+        e.preventDefault();
+        navigate(`/${placeName}/1/booking`);
     }
 
     return (
@@ -50,7 +56,7 @@ function Place() {
                         </div>
                         <div className='placeAddress'>lorem ipsum</div>
                         <div className='placePrice'><h3>Rs. 400</h3></div>
-                        <button className='bookButton'>
+                        <button onClick={(e) => {bookTicket(e)}} className='bookButton'>
                             Book Ticket
                         </button>
                     </div>
@@ -79,15 +85,6 @@ function Place() {
                     </div>
                     <div className='reviews'>
                         <p className='photoss'>Customer Reviews</p>
-                        {/* {reviews?.map((review) => {
-                            return (
-                                <div className='placeReview'>
-                                    <span>4 <p>hey this is my review</p></span>
-                                    <p>username</p>
-                                </div>
-                            )
-                        })}
-                        {reviews.length > 3 ? <button className='allReviewsButton'>Show All Reviews</button> : <></>} */}
                         <div className='reviewSwipper'>
                             <Swiper
                                 centeredSlides={false}

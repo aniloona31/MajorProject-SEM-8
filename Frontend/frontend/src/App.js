@@ -10,6 +10,8 @@ import SignIn from './Components/SignIn/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Tickets from './Components/Tickets/Tickets';
 import PostReview from './Components/PostReview/PostReview';
+import BookingForm from './Components/BookingForm/BookingForm';
+import RazorpayGateway from './Components/RazorpayGateway/RazorpayGateway';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path='/explore/:category/:city' element={<Explore/>}/>
           <Route path='/:city/place/:placeName' element={<Place/>}/>
           <Route path='/my-tickets' element={<Tickets/>}/>
+          <Route path='/:placeName/:placeId/booking' element={<BookingForm/>}/>
+          <Route path='/:ticketId/payment' element={<RazorpayGateway/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer/>
