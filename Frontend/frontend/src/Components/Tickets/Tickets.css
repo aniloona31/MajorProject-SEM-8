@@ -5,4 +5,5 @@
     justify-content: flex-start;
     align-items: center;
     margin-top: 40px;
+    overflow-y: scroll;
 }

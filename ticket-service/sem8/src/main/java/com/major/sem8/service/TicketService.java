@@ -1,5 +1,6 @@
 package com.major.sem8.service;
 
+import com.google.zxing.WriterException;
 import com.major.sem8.entity.Payment;
 import com.major.sem8.dto.TicketResponse;
 import com.major.sem8.entity.Ticket;
@@ -14,6 +15,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -24,6 +26,9 @@ public class TicketService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private QRService qrService;
 
     @Autowired
     private NewPlaceProxy placeProxy;
@@ -105,6 +110,16 @@ public class TicketService {
     }
 
     protected TicketResponse mapToDto(Ticket ticket){
+        byte[] qr = null;
+        if(ticket.isValid()){
+            try {
+                qr = qrService.generateQRCodeImage(ticket.getTicketId());
+            } catch (WriterException ex) {
+                throw new ApplicationException("error while generating qr", HttpStatus.INTERNAL_SERVER_ERROR);
+            } catch (IOException ex) {
+                throw new ApplicationException("error while generating qr", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
         return TicketResponse.builder()
                 .ticketId(ticket.getTicketId())
                 .price(ticket.getPrice())
@@ -113,6 +128,7 @@ public class TicketService {
                 .quantity(ticket.getQuantity())
                 .placeName(ticket.getPlaceName())
                 .isValid(ticket.isValid())
+                .ticketQr(qr)
                 .build();
     }
 }

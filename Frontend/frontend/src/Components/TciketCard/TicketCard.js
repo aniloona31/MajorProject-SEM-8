@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './TicketCard.css'
 import PostReview from '../PostReview/PostReview';
 
-function TicketCard() {
+function TicketCard({bookedDates, placeName, confirmation, quantity, ticketId, ticketQr}) {
 
   const[review,setReview] = useState(false);
   const addReview = () =>{
@@ -24,7 +24,7 @@ function TicketCard() {
             <span>2021</span>
           </p>
           <div className="show-name">
-            <h1>SOUR Prom</h1>
+            <h1>{placeName}</h1>
           </div>
           <p className="location"><span>East High School</span>
             <span className="separator"><i className="far fa-smile"></i></span><span>Salt Lake City, Utah</span>
@@ -38,7 +38,7 @@ function TicketCard() {
             <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code"/>
           </div>
           <p className="ticket-number">
-            #20030220
+            {ticketId}
           </p>
         </div>
       </div>

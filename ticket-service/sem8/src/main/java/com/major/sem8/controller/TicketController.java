@@ -9,6 +9,7 @@ import com.major.sem8.service.TicketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -35,7 +36,7 @@ public class TicketController {
     }
 
     @GetMapping("/all/user")
-    public ResponseEntity<List<TicketResponse>> getAllTicketsByUser(@RequestParam("email") String email){
+    public ResponseEntity<List<TicketResponse>> getAllTicketsByUser(@RequestHeader("X-Email") String email){
         return new ResponseEntity<>(ticketService.getAllTicketsByUser(email),HttpStatus.OK);
     }
 

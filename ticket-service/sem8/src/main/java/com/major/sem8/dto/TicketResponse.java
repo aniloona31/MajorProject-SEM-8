@@ -28,4 +28,6 @@ public class TicketResponse {
     private boolean confirmation;
 
     private boolean isValid;
+
+    private byte[] ticketQr;
 }
