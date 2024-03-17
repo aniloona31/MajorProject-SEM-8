@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './RazorpayGateway.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 import axios from 'axios';
@@ -9,6 +9,7 @@ function RazorpayGateway() {
 
     const { ticketId } = useParams();
     const [loader, setLoader] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const url = process.env.REACT_APP_ROOT_URL + `/payment/orderId/${ticketId}`
@@ -50,23 +51,26 @@ function RazorpayGateway() {
             description: "Test Transaction",
             order_id: data["razorpayOrderId"],
             currency: "INR",
-            handler: async (response) => {
+            handler: (response) => {
                 const token = localStorage.getItem('token');
                 const verifyUrl = process.env.REACT_APP_ROOT_URL + "/payment/verify";
-                axios.post(verifyUrl, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
+                axios.post(verifyUrl,
+                    JSON.stringify({
                         "razorpay_payment_id": response.razorpay_payment_id,
                         "razorpay_order_id": response.razorpay_order_id,
                         "razorpay_signature": response.razorpay_signature
-                    })
+                    }), {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
                 }).then((res) => {
-
+                    if(res.status === 200){
+                        navigate("/my-tickets");
+                    }
                 }).catch((error) => {
-
+                    toast.error("error while finishing payment");
+                    navigate("/Home");
                 })
             },
             theme: {
@@ -93,7 +97,15 @@ function RazorpayGateway() {
                     wrapperClass=""
                 />
                 :
-                <>RazorpayGateway</>}
+                <Oval
+                    visible={true}
+                    height="80"
+                    width="80"
+                    color="#4fa94d"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />}
         </div>
     )
 }

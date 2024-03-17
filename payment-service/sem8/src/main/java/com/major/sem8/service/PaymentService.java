@@ -70,7 +70,7 @@ public class PaymentService {
             Payment payment = paymentRepository.findByRazorpayOrderId(razorpayResp.getRazorpay_order_id())
                     .orElseThrow(() -> new ApplicationException("ORDERID DOESN'T EXISIT",HttpStatus.BAD_REQUEST));
             payment.setPaymentStatus(PaymentStatus.SUCCESSFUL.name());
-
+            paymentRepository.save(payment);
             publishPaymentEvent(payment);
 
             return "Successfully Verified";
