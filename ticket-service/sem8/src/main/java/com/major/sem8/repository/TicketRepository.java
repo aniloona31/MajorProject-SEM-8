@@ -12,4 +12,8 @@ public interface TicketRepository extends JpaRepository<Ticket,Long> {
     List<Ticket> findAllByEmail(String email);
 
     Optional<Ticket> findByTicketId(String ticketId);
+
+    List<Ticket> findAllByEmailOrderById(String email);
+
+    List<Ticket> findAllByEmailOrderByIdDesc(String email);
 }

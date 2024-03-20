@@ -64,4 +64,9 @@ public class PlaceService {
         Place place = placeRepository.findById(placeId).orElseThrow(() ->  new ApplicationException("INVALID PLACE",HttpStatus.BAD_REQUEST));
         return Double.parseDouble(place.getTicketPrice());
     }
+
+    public String getImageByPlaceId(Long placeId) {
+        Place place = placeRepository.findById(placeId).orElseThrow(() ->  new ApplicationException("INVALID PLACE",HttpStatus.BAD_REQUEST));
+        return place.getMainImage();
+    }
 }

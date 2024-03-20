@@ -30,4 +30,6 @@ public class TicketResponse {
     private boolean isValid;
 
     private byte[] ticketQr;
+
+    private String placeImage;
 }

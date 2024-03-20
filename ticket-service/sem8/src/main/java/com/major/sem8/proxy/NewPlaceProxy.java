@@ -10,4 +10,7 @@ public interface NewPlaceProxy {
 
     @GetMapping("/place/price")
     public ResponseEntity<Double> getPrice(@RequestParam("placeId") Long placeId);
+
+    @GetMapping("/place/image")
+    public ResponseEntity<String> getImage(@RequestParam("placeId") Long placeId);
 }

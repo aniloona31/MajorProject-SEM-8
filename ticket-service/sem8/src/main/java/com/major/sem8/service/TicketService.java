@@ -76,7 +76,7 @@ public class TicketService {
 
     public List<TicketResponse> getAllTicketsByUser(String email){
         try{
-            List<Ticket> tickets = ticketRepository.findAllByEmail(email);
+            List<Ticket> tickets = ticketRepository.findAllByEmailOrderByIdDesc(email);
             return tickets.stream()
                     .map(this::mapToDto)
                     .collect(Collectors.toList());
@@ -111,6 +111,13 @@ public class TicketService {
 
     protected TicketResponse mapToDto(Ticket ticket){
         byte[] qr = null;
+        String placeImage = null;
+        try {
+            placeImage = placeProxy.getImage(ticket.getPlaceId()).getBody();
+        }catch (Exception e){
+            throw new ApplicationException("error while getting image", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         if(ticket.isValid()){
             try {
                 qr = qrService.generateQRCodeImage(ticket.getTicketId());
@@ -129,6 +136,7 @@ public class TicketService {
                 .placeName(ticket.getPlaceName())
                 .isValid(ticket.isValid())
                 .ticketQr(qr)
+                .placeImage(placeImage)
                 .build();
     }
 }

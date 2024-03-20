@@ -50,4 +50,9 @@ public class PlaceController {
         return new ResponseEntity<>(placeService.getPrice(placeId),HttpStatus.OK);
     }
 
+    @GetMapping("/image")
+    public ResponseEntity<String> getImage(@RequestParam("placeId") Long placeId){
+        return new ResponseEntity<>(placeService.getImageByPlaceId(placeId), HttpStatus.OK);
+    }
+
 }

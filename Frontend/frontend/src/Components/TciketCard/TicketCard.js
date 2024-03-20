@@ -5,12 +5,20 @@ import PostReview from '../PostReview/PostReview';
 function TicketCard({ticket}) {
 
   const[review,setReview] = useState(false);
+  const[date, setDate] = useState(new Date(ticket.bookedDates[0]));
+
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
   const addReview = () =>{
     setReview(!review);
   }
 
   useEffect(() => {
-    console.log(ticket);
+    // const date = new Date(ticket.bookedDates[0]);
+    // // console.log(ticket.bookedDates[0].getDay());
+    // console.log(date);
+    console.log(ticket)
   },[])
 
   return (
@@ -23,15 +31,15 @@ function TicketCard({ticket}) {
         </div>
         <div className="ticket-info">
           <p className="date">
-            <span>TUESDAY</span>
-            <span className="june-29">JUNE 29TH</span>
-            <span>2021</span>
+            <span>{weekday[date.getDay()]}</span>
+            <span className="june-29">{month[date.getMonth()]}  {date.getDate()}</span>
+            <span>{date.getFullYear()}</span>
           </p>
           <div className="show-name">
             <h1>{ticket.placeName}</h1>
           </div>
-          <p className="location"><span>East High School</span>
-            <span className="separator"><i className="far fa-smile"></i></span><span>Salt Lake City, Utah</span>
+          <p className="location"><span>Quantity: {ticket.quantity}</span>
+            <span className="separator"><i className="far fa-smile"></i></span><span>Price: Rs.{ticket.price}</span>
           </p>
         </div>
       </div>
