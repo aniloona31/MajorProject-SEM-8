@@ -29,6 +29,10 @@ function Tickets() {
       }).catch((error) => {
         console.log(error);
         toast.error("error while fetching tickets");
+        if(error.response.data.message === "un authorized access to application"){
+          localStorage.removeItem('token');
+          navigate("/sign-in");
+        }
       })
     }
   }, [])

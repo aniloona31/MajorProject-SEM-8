@@ -14,12 +14,6 @@ function TicketCard({ticket}) {
     setReview(!review);
   }
 
-  useEffect(() => {
-    // const date = new Date(ticket.bookedDates[0]);
-    // // console.log(ticket.bookedDates[0].getDay());
-    // console.log(date);
-    console.log(ticket)
-  },[])
 
   return (
     <>
