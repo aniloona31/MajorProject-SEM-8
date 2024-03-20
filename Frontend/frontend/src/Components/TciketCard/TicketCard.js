@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './TicketCard.css'
 import PostReview from '../PostReview/PostReview';
 
-function TicketCard({bookedDates, placeName, confirmation, quantity, ticketId, ticketQr}) {
+function TicketCard({ticket}) {
 
   const[review,setReview] = useState(false);
   const addReview = () =>{
     setReview(!review);
   }
+
+  useEffect(() => {
+    console.log(ticket);
+  },[])
 
   return (
     <>
@@ -24,24 +28,24 @@ function TicketCard({bookedDates, placeName, confirmation, quantity, ticketId, t
             <span>2021</span>
           </p>
           <div className="show-name">
-            <h1>{placeName}</h1>
+            <h1>{ticket.placeName}</h1>
           </div>
           <p className="location"><span>East High School</span>
             <span className="separator"><i className="far fa-smile"></i></span><span>Salt Lake City, Utah</span>
           </p>
         </div>
       </div>
-      <div className="right">
+      {ticket.confirmation ? <div className="right">
         <div className="right-info-container">
           <span onClick={() => addReview()} className='reviewButton'>Add Review</span>
           <div className="barcode">
-            <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code"/>
+            <img src={`data:image/png;base64,${ticket.ticketQr}`} alt="QR code"/>
           </div>
-          <p className="ticket-number">
-            {ticketId}
+          <p style={{marginTop:"-10px"}} className="ticket-number">
+            {ticket.ticketId.substring(14)}
           </p>
         </div>
-      </div>
+      </div>:<div style={{color:"red", paddingLeft:"50px", fontWeight:"700"}}>CANCELED</div>}
     </div>
     </>
   )

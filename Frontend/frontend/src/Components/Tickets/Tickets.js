@@ -48,7 +48,7 @@ function Tickets() {
         />:
         <>{tickets?.map((ticket) => {
             return(
-              <TicketCard key={ticket.ticketId} props = {ticket}/>
+              <TicketCard key={ticket.ticketId} ticket = {ticket}/>
             )
         })}</>
       }
