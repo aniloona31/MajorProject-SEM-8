@@ -27,7 +27,7 @@ function TicketCard({ticket}) {
     <div className="ticket created-by-anniedotexe">
       <div className="left">
         <div className="ticketImage">
-          <img src='https://media.pitchfork.com/photos/60db53e71dfc7ddc9f5086f9/1:1/w_1656,h_1656,c_limit/Olivia-Rodrigo-Sour-Prom.jpg'/>
+          <img src={ticket.placeImage}/>
         </div>
         <div className="ticket-info">
           <p className="date">
