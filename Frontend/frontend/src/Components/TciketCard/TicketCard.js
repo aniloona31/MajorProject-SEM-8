@@ -17,7 +17,7 @@ function TicketCard({ticket}) {
 
   return (
     <>
-    {review && <PostReview addReview={addReview}/>}
+    {review && <PostReview addReview={addReview} ticket={ticket}/>}
     <div className="ticket created-by-anniedotexe">
       <div className="left">
         <div className="ticketImage">

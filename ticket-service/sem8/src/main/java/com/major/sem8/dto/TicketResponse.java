@@ -32,4 +32,8 @@ public class TicketResponse {
     private byte[] ticketQr;
 
     private String placeImage;
+
+    private String email;
+
+    private Long placeId;
 }

@@ -137,6 +137,8 @@ public class TicketService {
                 .isValid(ticket.isValid())
                 .ticketQr(qr)
                 .placeImage(placeImage)
+                .email(ticket.getEmail())
+                .placeId(ticket.getPlaceId())
                 .build();
     }
 }
