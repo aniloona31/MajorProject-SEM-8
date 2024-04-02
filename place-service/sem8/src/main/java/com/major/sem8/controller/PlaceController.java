@@ -22,13 +22,14 @@ public class PlaceController {
     @Autowired
     private PlaceService placeService;
 
-    @GetMapping("/all/{city}")
+    @GetMapping("/all/{category}/{city}")
     @CircuitBreaker(name = "PlaceService", fallbackMethod = "getDefaultPlaces")
     @Retry(name = "PlaceService")
-    public ResponseEntity<List<PlaceResponse>> getAllPlacesByCity(@PathVariable String city,
+    public ResponseEntity<List<PlaceResponse>> getAllPlacesByCity(@PathVariable(name = "city") String city,
+                                                          @PathVariable(name = "category") String category,
                                                           @RequestParam(value = "pageSize",defaultValue = "10",required = false) Integer pageSize,
                                                           @RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber){
-        return new ResponseEntity<>(placeService.getAllPlacesByCity(city,pageSize,pageNumber), HttpStatus.OK);
+        return new ResponseEntity<>(placeService.getAllPlacesByCity(city,category,pageSize,pageNumber), HttpStatus.OK);
     }
 
     public ResponseEntity<List<PlaceResponse>> getDefaultPlaces(Exception e){

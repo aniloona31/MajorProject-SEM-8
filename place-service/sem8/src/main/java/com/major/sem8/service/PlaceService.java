@@ -25,10 +25,15 @@ public class PlaceService {
     @Autowired
     private ReviewProxy reviewProxy;
 
-    public List<PlaceResponse> getAllPlacesByCity(String city, Integer size, Integer number){
+    public List<PlaceResponse> getAllPlacesByCity(String city, String category,Integer size, Integer number){
         try {
             Pageable pageable = PageRequest.of(number, size);
-            Page<Place> placePage = placeRepository.findAll(pageable);
+            Page<Place> placePage = null;
+            if(category.equals("places")){
+                placePage = placeRepository.findByCity(city,pageable);
+            }else {
+                placePage = placeRepository.findByCityAndCategory(city, category, pageable);
+            }
             List<Place> content = placePage.getContent();
             return content.stream()
                     .map((place) -> mapToDto(place,reviewProxy.getTopReviews(place.getId()).getBody()))

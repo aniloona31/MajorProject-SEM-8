@@ -33,4 +33,6 @@ public class Place {
 
     private String ticketPrice;
 
+    private String category;
+
 }
