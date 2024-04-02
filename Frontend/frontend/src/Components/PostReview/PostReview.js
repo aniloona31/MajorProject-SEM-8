@@ -27,8 +27,9 @@ function PostReview({ addReview, ticket }) {
             }).then((res) => {
                 setDescription(res.data.description);
                 setRating(res.data.rating);
+                toast.success("review updated successfully");
             }).catch((error) =>{
-                console.log(error);
+                toast.error(error.response.data);
             })
         }
 
@@ -94,7 +95,7 @@ function PostReview({ addReview, ticket }) {
                         <input onChange={() => setRating(1)} type="radio" name="star" id="star4" defaultChecked />
                         <label className="star" for="star4"></label>
                     </div>
-                    <textarea onChange={(e) => {console.log(rating);setDescription(e.target.value)}} value={description} cols="30" rows="6" placeholder="Tell us about your experience!"></textarea>
+                    <textarea onChange={(e) => {setDescription(e.target.value)}} value={description} cols="30" rows="6" placeholder="Tell us about your experience!"></textarea>
                 </div>
                 <div className='lowerPart'>
                     <div className="upload__box">
