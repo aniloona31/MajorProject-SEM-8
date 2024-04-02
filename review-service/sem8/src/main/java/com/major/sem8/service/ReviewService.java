@@ -43,7 +43,9 @@ public class ReviewService {
     }
 
     public String addReview(List<MultipartFile> images, Review review) throws IOException {
-
+        if(reviewRepository.existsByTicketId(review.getTicketId())){
+            return updateReview(review);
+        }
         List<String> data = uploadImageToCloudinary(images);
 //            System.out.println(data.get("url").toString());
         try{
@@ -95,6 +97,7 @@ public class ReviewService {
                 .description(review.getDescription())
                 .username(review.getUsername())
                 .images(review.getImages())
+                .rating(review.getRating())
                 .build();
     }
 }

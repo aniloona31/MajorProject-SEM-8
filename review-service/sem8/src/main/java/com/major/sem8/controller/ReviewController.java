@@ -28,7 +28,7 @@ public class ReviewController{
                                             @RequestParam("ticketId") String ticketId,
                                             @RequestParam("email") String email,
                                             @RequestParam("rating") Integer rating,
-                                            @RequestParam(value = "files") List<MultipartFile> images) throws IOException {
+                                            @RequestParam(value = "files",required = false) List<MultipartFile> images) throws IOException {
         Review review = new Review();
         review.setDescription(description);
         review.setRating(rating);
