@@ -100,4 +100,13 @@ public class ReviewService {
                 .rating(review.getRating())
                 .build();
     }
+
+    public Double getRating(Long placeId) {
+        try {
+            Double rating = reviewRepository.findRatingByPlaceId(placeId);
+            return rating;
+        }catch (Exception e){
+            throw new ApplicationException("error while getting rating",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

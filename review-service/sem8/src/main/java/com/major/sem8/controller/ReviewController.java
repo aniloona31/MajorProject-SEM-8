@@ -65,4 +65,9 @@ public class ReviewController{
     public ResponseEntity<ReviewResponse> getReview(@RequestParam("ticketId") String ticketId){
         return new ResponseEntity<>(reviewService.getReview(ticketId),HttpStatus.OK);
     }
+
+    @GetMapping("/get/rating/{placeId}")
+    public ResponseEntity<Double> getRating(@PathVariable(name = "placeId") Long placeId){
+        return new ResponseEntity<>(reviewService.getRating(placeId),HttpStatus.OK);
+    }
 }
