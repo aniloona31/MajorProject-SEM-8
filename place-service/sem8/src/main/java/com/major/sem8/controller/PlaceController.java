@@ -32,7 +32,7 @@ public class PlaceController {
         return new ResponseEntity<>(placeService.getAllPlacesByCity(city,category,pageSize,pageNumber), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<PlaceResponse> getPlaceById(@PathVariable Long id){
         return new ResponseEntity<>(placeService.getPlaceById(id),HttpStatus.OK);
     }

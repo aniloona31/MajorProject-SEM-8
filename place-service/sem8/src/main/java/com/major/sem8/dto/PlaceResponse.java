@@ -30,4 +30,8 @@ public class PlaceResponse {
     private List<Object> reviews;
 
     private Double rating;
+
+    private String category;
+
+    private String price;
 }

@@ -30,7 +30,6 @@ function Navbar() {
   const navigate = useNavigate();
 
   const goToExplore = (category) => {
-    console.log("category clicked")
     navigate(`/explore/${category}/${city}`);
   }
 

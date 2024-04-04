@@ -25,7 +25,7 @@ function App() {
           <Route path='/explore/:category/:city' element={<Explore/>}/>
           <Route path='/:city/place/:placeName' element={<Place/>}/>
           <Route path='/my-tickets' element={<Tickets/>}/>
-          <Route path='/:placeName/:placeId/booking' element={<BookingForm/>}/>
+          <Route path='/:placeName/booking' element={<BookingForm/>}/>
           <Route path='/:ticketId/payment' element={<RazorpayGateway/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>

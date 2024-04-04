@@ -78,6 +78,7 @@ public class PlaceService {
                 .city(place.getCity())
                 .discription(place.getDiscription())
                 .rating(rating)
+                .category(place.getCategory())
                 .build();
     }
 
@@ -91,6 +92,8 @@ public class PlaceService {
                 .discription(place.getDiscription())
                 .reviews(reviews)
                 .rating(rating)
+                .price(place.getTicketPrice())
+                .category(place.getCategory())
                 .build();
     }
     public Double getPrice(Long placeId) {

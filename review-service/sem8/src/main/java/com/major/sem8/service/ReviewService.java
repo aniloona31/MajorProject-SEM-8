@@ -60,7 +60,7 @@ public class ReviewService {
     public List<ReviewResponse> getReviews(Long placeId, int pageNumber, int pageSize) {
         try {
             Pageable pageable = PageRequest.of(pageNumber,pageSize);
-            Page<Review> page = reviewRepository.findAll(pageable);
+            Page<Review> page = reviewRepository.findByPlaceId(placeId,pageable);
             List<Review> content = page.getContent();
             return content.stream()
                     .map(this::mapToDto)

@@ -71,6 +71,7 @@ function Explore() {
     //   console.log(category)
 
     useEffect(() => {
+        window.scrollTo(0,0);
         navigate(`/explore/${category}/${city}`);
         const url = process.env.REACT_APP_ROOT_URL + `/place/all/${category}/${city}`;
         axios.get(url, {
@@ -78,17 +79,17 @@ function Explore() {
                 "Content-Type": "application/json"
             }
         }).then((res) => {
-            console.log(res);
+            // console.log(res);
             if (res.status === 200) {
                 setPlaces(res.data);
                 setLoader(false);
             }
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
             toast.error(error.response.data);
             setLoader(false)
         })
-    }, [city])
+    }, [city,category])
 
     return (
         <div className='exploreTopContainer'>
