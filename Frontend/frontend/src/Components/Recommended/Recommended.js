@@ -101,7 +101,7 @@ function Recommended() {
       toast.error(error.response.data);
     })
 
-  }, [])
+  }, [city])
 
   const goToPlaces = () => {
     navigate(`/explore/places/${city}`)

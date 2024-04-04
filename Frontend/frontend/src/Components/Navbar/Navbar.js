@@ -6,17 +6,8 @@ import Select from 'react-dropdown-select'
 import { useNavigate } from 'react-router-dom'
 import categories from '../../Utils/Categories'
 import { useStateValue } from '../../Context/StateProvider'
+import cities from '../../Utils/Cities'
 
-const options = [
-    { 
-      value: 1,
-      label: "Mumbai"
-    },
-    {
-      value:  2,
-      label: "Delhi"
-    }
-  ];
 
   const styles = {
     padding : "5px 15px 5px 15px",
@@ -61,7 +52,7 @@ function Navbar() {
                 <input type='text' placeholder='Search for Place'/>
             </div>
             <div className='rightElements'>
-                <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={options} onChange={(values)=>{setCity(values)}} value={city} placeholder={city}/>
+                <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={cities} onChange={(values)=>{setCity(values)}} value={city} placeholder={city}/>
                 {localStorage.getItem('token') == null? <button onClick={() => {navigate("/sign-in")}} className='signInButton'>Sign in</button> : <></>}
                 {localStorage.getItem('token') 
                 ?

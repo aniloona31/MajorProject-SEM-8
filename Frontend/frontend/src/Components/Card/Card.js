@@ -10,7 +10,7 @@ function Card({place}) {
     <div onClick={() => {navigate(`/${place.city}/place/${place.placeName}`,{state:place.id})}} className='card'>
         <img className="cardImage" src={place.mainImage}/>
         <div className='cardContent'>
-            <span className='cardRating'>{place.rating==null ? 0 : place.rating}</span>
+            <span className='cardRating'>{place.rating==null ? 0.0 : Math.round(place.rating*10)/10}</span>
             <span className='cardPlace'>{place.placeName}</span>
             <span className='cardCategory'>{place.category}</span>
         </div>
