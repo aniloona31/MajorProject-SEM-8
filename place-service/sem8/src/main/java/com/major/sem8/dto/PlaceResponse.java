@@ -28,4 +28,6 @@ public class PlaceResponse {
     private String city;
 
     private List<Object> reviews;
+
+    private Double rating;
 }

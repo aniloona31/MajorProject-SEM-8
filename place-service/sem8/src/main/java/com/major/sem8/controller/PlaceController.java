@@ -32,15 +32,6 @@ public class PlaceController {
         return new ResponseEntity<>(placeService.getAllPlacesByCity(city,category,pageSize,pageNumber), HttpStatus.OK);
     }
 
-    public ResponseEntity<List<PlaceResponse>> getDefaultPlaces(Exception e){
-        ArrayList<Object> reviews = new ArrayList<>();
-        return new ResponseEntity<>(Stream.of(new PlaceResponse(1l,"balaji dham","temple","","sri ganganagar", "sri ganganagar", reviews)
-                ,new PlaceResponse(1l,"balaji dham","temple","","sri ganganagar", "sri ganganagar", reviews)
-                ,new PlaceResponse(1l,"balaji dham","temple","","sri ganganagar", "sri ganganagar", reviews)
-                ,new PlaceResponse(1l,"balaji dham","temple","","sri ganganagar", "sri ganganagar", reviews)
-        ).collect(Collectors.toList()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<PlaceResponse> getPlaceById(@PathVariable Long id){
         return new ResponseEntity<>(placeService.getPlaceById(id),HttpStatus.OK);

@@ -5,6 +5,7 @@ import com.major.sem8.entity.Place;
 import com.major.sem8.exception.ApplicationException;
 import com.major.sem8.proxy.ReviewProxy;
 import com.major.sem8.repository.PlaceRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +37,7 @@ public class PlaceService {
             }
             List<Place> content = placePage.getContent();
             return content.stream()
-                    .map((place) -> mapToDto(place,reviewProxy.getTopReviews(place.getId()).getBody()))
+                    .map(this::mapToDto)
                     .collect(Collectors.toList());
         }catch (Exception e){
             throw new RuntimeException("error occured while getting the place page");
@@ -45,26 +46,53 @@ public class PlaceService {
 
     public PlaceResponse getPlaceById(Long id){
         Place place = placeRepository.findById(id).orElseThrow(() -> new RuntimeException("place with id doesn't exist"));
+        ResponseEntity<List<Object>> reviews = null;
         try {
-            ResponseEntity<List<Object>> reviews = reviewProxy.getTopReviews(place.getId());
-            System.out.println(reviews);
-            return mapToDto(place,reviews.getBody());
+            reviews = reviewProxy.getTopReviews(place.getId());
+//            return mapToDtoWithReviews(place,reviews.getBody());
         }catch (Exception e){
             throw new ApplicationException("something went wrong while getting the reviews", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        ResponseEntity<Double> rating = null;
+        try{
+            rating = reviewProxy.getRating(place.getId());
+        }catch (Exception e){
+            throw new ApplicationException("error while getting rating",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return mapToDtoWithReviews(place,reviews.getBody(),rating.getBody());
     }
 
-    protected PlaceResponse mapToDto(Place place,List<Object> reviews){
+    protected PlaceResponse mapToDto(Place place){
+        Double rating = null;
+        try{
+            rating = reviewProxy.getRating(place.getId()).getBody();
+        }catch (Exception e){
+            throw new ApplicationException("error while getting rating",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return PlaceResponse.builder()
+                .id(place.getId())
+                .placeName(place.getPlaceName())
+                .address(place.getAddress())
+                .mainImage(place.getMainImage())
+                .city(place.getCity())
+                .discription(place.getDiscription())
+                .rating(rating)
+                .build();
+    }
+
+    protected PlaceResponse mapToDtoWithReviews(Place place,List<Object> reviews,Double rating){
+        return PlaceResponse.builder()
+                .id(place.getId())
                 .placeName(place.getPlaceName())
                 .address(place.getAddress())
                 .mainImage(place.getMainImage())
                 .city(place.getCity())
                 .discription(place.getDiscription())
                 .reviews(reviews)
+                .rating(rating)
                 .build();
     }
-
     public Double getPrice(Long placeId) {
         Place place = placeRepository.findById(placeId).orElseThrow(() ->  new ApplicationException("INVALID PLACE",HttpStatus.BAD_REQUEST));
         return Double.parseDouble(place.getTicketPrice());
