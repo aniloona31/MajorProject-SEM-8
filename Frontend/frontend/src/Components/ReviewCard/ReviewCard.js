@@ -29,7 +29,7 @@ function ReviewCard({ review }) {
                 </div>
                 <article>
                     <p class="review">{review.description}</p>
-                    <p>{months[date.getMonth()]} {date.getDay()}, {date.getFullYear()}</p>
+                    <p>{months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}</p>
                 </article>
             </div>
         </div>

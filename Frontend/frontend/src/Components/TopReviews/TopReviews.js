@@ -3,7 +3,21 @@ import './TopReviews.css'
 import ReviewCard from '../ReviewCard/ReviewCard'
 
 const topReviews = [
-  1, 2, 3
+  {
+    rating: 5,
+    description: "Lorem ipsum dolor sit amet. Et reiciendis molestias et commodi corrupti et provident sint qui iste voluptatem et consequatur velit. Rem voluptatum deserunt ab voluptatem sapiente aut aspernatur quibusdam ut officia iusto.",
+    date: "2024-01-16"
+  },
+  {
+    rating: 4,
+    description: "Lorem ipsum dolor sit amet. Et reiciendis molestias et commodi corrupti et provident sint qui iste voluptatem et consequatur velit. Rem voluptatum deserunt ab voluptatem sapiente aut aspernatur quibusdam ut officia iusto.",
+    date: "2024-02-24"
+  },
+  {
+    rating: 5,
+    description: "Lorem ipsum dolor sit amet. Et reiciendis molestias et commodi corrupti et provident sint qui iste voluptatem et consequatur velit. Rem voluptatum deserunt ab voluptatem sapiente aut aspernatur quibusdam ut officia iusto.",
+    date: "2024-01-24"
+  }
 ]
 
 function TopReviews() {
@@ -17,7 +31,7 @@ function TopReviews() {
       <div className='reviewss'>
         {topReviews.map((review) => {
           return (
-            <ReviewCard />
+            <ReviewCard review={review} />
           )
         })}
       </div>
