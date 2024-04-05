@@ -67,7 +67,7 @@ function Place() {
                 wrapperClass=""
             /></div> : <>
                 <ToastContainer />
-                {viewGallery === true ? <Gallery changeViewGallery={changeViewGallery} /> : <></>}
+                {viewGallery === true ? <Gallery images={place.images} changeViewGallery={changeViewGallery} /> : <></>}
                 <div className='placeContainer'>
                     <div className='placeCard' style={{ backgroundImage: `linear-gradient(90deg, #1A1A1A 24.97%, #1A1A1A 38.3%, rgba(12, 12, 12, 0.041) 97.47%, #1A1A1A 100%), url(${place.mainImage})` }}>
                         <div className='leftPlace'>

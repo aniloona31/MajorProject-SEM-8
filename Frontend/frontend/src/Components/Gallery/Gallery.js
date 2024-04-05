@@ -3,25 +3,7 @@ import './Gallery.css'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const images = [
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg",
-    "https://cdn.pixabay.com/photo/2016/11/21/16/59/animal-1846462__340.jpg"
-]
-
-function Gallery({changeViewGallery}) {
+function Gallery({images,changeViewGallery}) {
   return (
     <div className='galleryContainer'>
         <div onClick={() => {changeViewGallery()}} className="galleryClose">

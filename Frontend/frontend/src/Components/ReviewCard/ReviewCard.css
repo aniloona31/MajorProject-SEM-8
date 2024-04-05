@@ -51,6 +51,7 @@
 .top ul {
     display: flex;
     list-style: none;
+    padding-inline-start: 0;
 }
 
 .top ul li {

@@ -68,6 +68,8 @@ public class ReviewService {
         }
     }
     public String addReview(List<MultipartFile> images, Review review) throws IOException {
+        Date date = new Date();
+        review.setDate(date);
         if(reviewRepository.existsByTicketId(review.getTicketId())){
             return updateReview(review);
         }
@@ -124,6 +126,7 @@ public class ReviewService {
                 .username(review.getUsername())
                 .images(review.getImages())
                 .rating(review.getRating())
+                .date(review.getDate())
                 .build();
     }
 
@@ -138,7 +141,6 @@ public class ReviewService {
 
     public List<String> getImages(Long placeId){
         Optional<Images> images = imageRepository.findByPlaceId(placeId);
-        System.out.println(images);
         if(images.isEmpty()){
             return null;
         }else{
