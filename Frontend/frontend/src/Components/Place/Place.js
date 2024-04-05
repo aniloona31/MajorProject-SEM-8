@@ -26,7 +26,7 @@ function Place() {
                 'Content-Type': "application/json"
             }
         }).then((res) => {
-            console.log(res);
+            // console.log(res.data.reviews)
             if (res.status === 200) {
                 setPlace(res.data);
                 setLoader(false);
@@ -96,20 +96,16 @@ function Place() {
                         <div className='customerPhotos'>
                             <p className='photoss'>Customer Photos</p>
                             <section>
-                                {place?.reviews?.map((review, i) => {
-                                    return (
-                                        review?.images?.map((image, j) => {
-                                            if (i === place.reviews.length - 1 && j === review.images.length - 1) {
-                                                return (
-                                                    <div onClick={() => { changeViewGallery() }} style={{ backgroundColor: "grey", backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png)` }} className={`box box-${k++}`}></div>
-                                                )
-                                            } else {
-                                                return (
-                                                    <div style={{ backgroundImage: `url(${image})` }} className={`box box-${k++}`}></div>
-                                                )
-                                            }
-                                        })
-                                    )
+                                {place?.images?.slice(0,Math.min(5,place.images.length)).map((photo,i) => {
+                                    if(i == 5 || i == place.images.length-1){
+                                        return (
+                                            <div onClick={() => { changeViewGallery() }} style={{ backgroundColor: "grey", backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png)` }} className={`box box-${k++}`}></div>
+                                        )
+                                    }else{
+                                        return (
+                                            <div style={{ backgroundImage: `url(${photo})` }} className={`box box-${k++}`}></div>
+                                        )
+                                    }
                                 })}
                             </section>
                         </div>

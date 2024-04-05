@@ -59,8 +59,14 @@ public class PlaceService {
         }catch (Exception e){
             throw new ApplicationException("error while getting rating",HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        ResponseEntity<List<String>> images = null;
+        try{
+            images = reviewProxy.getImages(place.getId());
+        }catch (Exception e){
+            throw new ApplicationException("error while getting images", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-        return mapToDtoWithReviews(place,reviews.getBody(),rating.getBody());
+        return mapToDtoWithReviews(place,reviews.getBody(),rating.getBody(),images.getBody());
     }
 
     protected PlaceResponse mapToDto(Place place){
@@ -82,7 +88,7 @@ public class PlaceService {
                 .build();
     }
 
-    protected PlaceResponse mapToDtoWithReviews(Place place,List<Object> reviews,Double rating){
+    protected PlaceResponse mapToDtoWithReviews(Place place,List<Object> reviews,Double rating,List<String> images){
         return PlaceResponse.builder()
                 .id(place.getId())
                 .placeName(place.getPlaceName())
@@ -94,6 +100,7 @@ public class PlaceService {
                 .rating(rating)
                 .price(place.getTicketPrice())
                 .category(place.getCategory())
+                .images(images)
                 .build();
     }
     public Double getPrice(Long placeId) {

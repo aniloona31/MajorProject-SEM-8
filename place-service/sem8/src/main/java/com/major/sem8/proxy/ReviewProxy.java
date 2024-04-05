@@ -16,4 +16,7 @@ public interface ReviewProxy {
     @GetMapping("/review/get/rating/{placeId}")
     public ResponseEntity<Double> getRating(@PathVariable(name = "placeId") Long placeId);
 
+    @GetMapping("/review/get/images/{placeId}")
+    public ResponseEntity<List<String>> getImages(@PathVariable(name = "placeId") Long placeId);
+
 }

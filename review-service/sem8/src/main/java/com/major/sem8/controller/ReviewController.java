@@ -70,4 +70,9 @@ public class ReviewController{
     public ResponseEntity<Double> getRating(@PathVariable(name = "placeId") Long placeId){
         return new ResponseEntity<>(reviewService.getRating(placeId),HttpStatus.OK);
     }
+
+    @GetMapping("/get/images/{placeId}")
+    public ResponseEntity<List<String>> getImages(@PathVariable(name = "placeId") Long placeId){
+        return new ResponseEntity<>(reviewService.getImages(placeId),HttpStatus.OK);
+    }
 }

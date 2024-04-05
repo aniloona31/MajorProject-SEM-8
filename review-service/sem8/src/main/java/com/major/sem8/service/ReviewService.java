@@ -2,8 +2,10 @@ package com.major.sem8.service;
 
 import com.cloudinary.Cloudinary;
 import com.major.sem8.dto.ReviewResponse;
+import com.major.sem8.entity.Images;
 import com.major.sem8.entity.Review;
 import com.major.sem8.exception.ApplicationException;
+import com.major.sem8.repository.ImageRepository;
 import com.major.sem8.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,10 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +27,9 @@ public class ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     private List<String> uploadImageToCloudinary(List<MultipartFile> images) throws IOException {
         try {
@@ -42,6 +44,29 @@ public class ReviewService {
         }
     }
 
+    protected void addImages(List<String> data,Long placeId){
+        Images images = imageRepository.getByPlaceId(placeId);
+        try{
+            if(images == null){
+                Images img = new Images();
+                img.setPlaceId(placeId);
+                img.setImages(data);
+                imageRepository.save(img);
+            }else{
+                List<String> y = images.getImages();
+                for(String x : data){
+                    y.add(x);
+                }
+
+                images.setImages(y);
+                imageRepository.save(images);
+            }
+
+            return ;
+        }catch (Exception e){
+            throw new ApplicationException("error while adding images to Images DB", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     public String addReview(List<MultipartFile> images, Review review) throws IOException {
         if(reviewRepository.existsByTicketId(review.getTicketId())){
             return updateReview(review);
@@ -49,6 +74,7 @@ public class ReviewService {
         List<String> data = uploadImageToCloudinary(images);
 //            System.out.println(data.get("url").toString());
         try{
+            addImages(data,review.getPlaceId());
             review.setImages(data);
             reviewRepository.save(review);
             return "review uploaded succesfully";
@@ -107,6 +133,16 @@ public class ReviewService {
             return rating;
         }catch (Exception e){
             throw new ApplicationException("error while getting rating",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public List<String> getImages(Long placeId){
+        Optional<Images> images = imageRepository.findByPlaceId(placeId);
+        System.out.println(images);
+        if(images.isEmpty()){
+            return null;
+        }else{
+            return images.get().getImages();
         }
     }
 }
