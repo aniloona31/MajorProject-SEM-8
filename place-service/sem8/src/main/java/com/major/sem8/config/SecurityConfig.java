@@ -24,7 +24,8 @@ public class SecurityConfig {
                         .requestMatchers("/place/**",
                                 "/place-service/v3/api-docs/**",
                                 "/place-service/swagger-ui/**",
-                                "/actuator/**")
+                                "/actuator/**",
+                                "/event/**")
 //                        .access(hasIpAddress("127.0.0.1"))
 //                        .anyRequest()
                         .permitAll()).build();
