@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './EventPage.css'
 import { Oval } from 'react-loader-spinner'
 import { ToastContainer, toast } from 'react-toastify'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 function EventPage() {
@@ -10,8 +10,10 @@ function EventPage() {
     const {id} = useParams();
     const [loader,setLoader] = useState(true);
     const [event,setEvent] = useState();
+    const navigate = useNavigate(); 
 
     useEffect(() => {
+        window.scrollTo(0,0);
         const url = process.env.REACT_APP_ROOT_URL + `/event/get/${id}`
         console.log('called')
         axios.get(url,{
@@ -32,7 +34,16 @@ function EventPage() {
     },[])
 
     const bookTicket = (e) =>{
-
+        e.preventDefault();
+        if (localStorage.getItem('token') === null) {
+            navigate('sign-in');
+        }
+        navigate(`/${event.eventName}/booking`, { state: {
+            "id" : event.id,
+            "price" : event.ticketPrice,
+            "type" : "event",
+            "date" : event.date
+        }});
     }
     return (
         <div className='eventPage'>

@@ -52,7 +52,11 @@ function Place() {
         if (localStorage.getItem('token') === null) {
             navigate('sign-in');
         }
-        navigate(`/${placeName}/booking`, { state: location.state });
+        navigate(`/${placeName}/booking`, { state: {
+            "id" : location.state,
+            "price" : place.price,
+            "type" : "place"
+        } });
     }
 
     return (

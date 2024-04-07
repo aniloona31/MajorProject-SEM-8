@@ -39,7 +39,7 @@ function TicketCard({ticket}) {
       </div>
       {ticket.confirmation ? <div className="right">
         <div className="right-info-container">
-          <span onClick={() => addReview()} className='reviewButton'>Add Review</span>
+          {ticket["placeId"]!=null ? <span onClick={() => addReview()} className='reviewButton'>Add Review</span>: <></>}
           <div className="barcode">
             <img src={`data:image/png;base64,${ticket.ticketQr}`} alt="QR code"/>
           </div>

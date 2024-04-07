@@ -6,16 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 // import { ToastContainer } from 'react-toastify/dist/components';
 import { toast, ToastContainer } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function BookingForm() {
 
+  const location = useLocation();
   const [date, setDate] = useState(new Date());
-  const [price, setPrice] = useState(10);
+  const [price, setPrice] = useState(location.state["price"]);
   const [quantity, setQuantity] = useState(1);
   const [email, setEmail] = useState(localStorage.getItem('email'));
-  const {placeId,placeName} = useParams();
+  const {placeName} = useParams();
   const navigate = useNavigate();
 
   const decrease = () => {
@@ -35,16 +36,21 @@ function BookingForm() {
     console.log("order clicked");
     const token = localStorage.getItem('token')
     if(token != null){
-        const url = process.env.REACT_APP_ROOT_URL + "/ticket/buy";
-        axios.post(url,{
-            "email" : email,
-            "price" : price,
-            "quantity" : quantity,
-            "bookedDates" : [date],
-            "placeId" : placeId,
-            "placeName" : placeName
+        const obj = {};
+        obj["email"] = email;
+        obj["price"] = price;
+        obj["quantity"] = quantity;
+        if(location.state["type"] === "place"){
+            obj["placeId"] = location.state["id"];
+            obj["bookedDates"] = [date];
+        }else{
+            obj["eventId"] = location.state["id"];
+            obj["bookedDates"] = [location.state["date"]]
+        }
+        obj["placeName"] = placeName
 
-        },{
+        const url = process.env.REACT_APP_ROOT_URL + "/ticket/buy";
+        axios.post(url,obj,{
             headers: {
                 'Content-Type' : 'application/json',
                 'Authorization' : `Bearer ${token}`
@@ -90,7 +96,7 @@ function BookingForm() {
             </div>
             <div className="form-group">
                 <label for="date">Date:</label>
-                <DatePicker minDate={new Date()} className='bookingFormInput' selected={date} onChange={(currentDate) => setDate(currentDate)} />
+                {location.state["type"] == "place" ? <DatePicker minDate={new Date()} className='bookingFormInput' selected={date} onChange={(currentDate) => setDate(currentDate)} /> : <DatePicker className='bookingFormInput' selected={location.state["date"]} disabled/>}
             </div>
             <button className="submitButton" onClick={(e) => {createOrder(e)}}>Submit</button>
         </form>

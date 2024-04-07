@@ -31,4 +31,6 @@ public class Ticket {
     private boolean confirmation;
 
     private boolean isValid;
+
+    private Long eventId;
 }

@@ -12,6 +12,7 @@ function Tickets() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0,0);
     const token = localStorage.getItem('token');
     if (token == null) {
       navigate('/sign-in');
