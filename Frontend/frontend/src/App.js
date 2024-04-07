@@ -9,9 +9,9 @@ import ErrorPage from './Components/ErrorPage/ErrorPage';
 import SignIn from './Components/SignIn/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Tickets from './Components/Tickets/Tickets';
-import PostReview from './Components/PostReview/PostReview';
 import BookingForm from './Components/BookingForm/BookingForm';
 import RazorpayGateway from './Components/RazorpayGateway/RazorpayGateway';
+import EventPage from './Components/EventPage/EventPage';
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path='/my-tickets' element={<Tickets/>}/>
           <Route path='/:placeName/booking' element={<BookingForm/>}/>
           <Route path='/:ticketId/payment' element={<RazorpayGateway/>}/>
+          <Route path='/event/:id' element={<EventPage/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer/>
