@@ -48,10 +48,20 @@ public class TicketService {
         }
     }
 
-    public TicketResponse buyTicket(Ticket details){
-        Double singleTicketPrice = getTicketPrice(details.getPlaceId());
+    private Double getTicketPriceForEvent(Long eventId){
         try{
-            details.setPrice(details.getQuantity()*singleTicketPrice);
+            Double price = placeProxy.getEventPrice(eventId).getBody();
+//            System.out.println(price);
+            return price;
+        }catch (Exception e){
+            throw new ApplicationException("UNABLE TO FETCH PRICE",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    protected TicketResponse buyTicketForPlace(Ticket details){
+        Double singleTicketPrice = getTicketPrice(details.getPlaceId());
+        try {
+            details.setPrice(details.getQuantity() * singleTicketPrice);
             String ticketId = UUID.randomUUID().toString();
             details.setTicketId(ticketId);
             details.setConfirmation(false);
@@ -69,8 +79,51 @@ public class TicketService {
                             sr.getProducerRecord().value()));
 
             return mapToDto(ticket);
+
         }catch(Exception e){
             throw new ApplicationException("error while generating ticket", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    protected TicketResponse buyTicketForEvent(Ticket details){
+        Double singleTicketPrice = getTicketPriceForEvent(details.getEventId());
+        try {
+            details.setPrice(details.getQuantity() * singleTicketPrice);
+            String ticketId = UUID.randomUUID().toString();
+            details.setTicketId(ticketId);
+            details.setConfirmation(false);
+            details.setValid(false);
+            Ticket ticket = ticketRepository.save(details);
+
+            LOG.info("Processed: ticket->{}", ticket);
+
+            CompletableFuture<SendResult<String, Ticket>> result = kafkaTemplate
+                    .send("ticket-event", ticket);
+            result.whenComplete((sr, ex) ->
+                    LOG.debug("Sent(key={},partition={}): {}",
+                            sr.getProducerRecord().partition(),
+                            sr.getProducerRecord().key(),
+                            sr.getProducerRecord().value()));
+
+            return mapToDto(ticket);
+
+        }catch(Exception e){
+            throw new ApplicationException("error while generating ticket", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    public TicketResponse buyTicket(Ticket details) {
+        try {
+            if (details.getPlaceId() == null && details.getEventId() == null) {
+                throw new ApplicationException("Invalid Request", HttpStatus.BAD_REQUEST);
+            } else if (details.getEventId() != null && details.getPlaceId() != null) {
+                throw new ApplicationException("Invalid Request", HttpStatus.BAD_REQUEST);
+            } else if (details.getPlaceId() != null) {
+                return buyTicketForPlace(details);
+            } else {
+                return buyTicketForEvent(details);
+            }
+        }catch (Exception e){
+            throw new ApplicationException("couldn't process buy ticket request",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -111,9 +164,13 @@ public class TicketService {
 
     protected TicketResponse mapToDto(Ticket ticket){
         byte[] qr = null;
-        String placeImage = null;
+        String image = null;
         try {
-            placeImage = placeProxy.getImage(ticket.getPlaceId()).getBody();
+            if(ticket.getPlaceId() != null) {
+                image = placeProxy.getImage(ticket.getPlaceId()).getBody();
+            }else{
+                image = placeProxy.getEventImage(ticket.getEventId()).getBody();
+            }
         }catch (Exception e){
             throw new ApplicationException("error while getting image", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -136,9 +193,10 @@ public class TicketService {
                 .placeName(ticket.getPlaceName())
                 .isValid(ticket.isValid())
                 .ticketQr(qr)
-                .placeImage(placeImage)
+                .placeImage(image)
                 .email(ticket.getEmail())
                 .placeId(ticket.getPlaceId())
+                .eventId(ticket.getEventId())
                 .build();
     }
 }

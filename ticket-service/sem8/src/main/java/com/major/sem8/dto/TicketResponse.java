@@ -36,4 +36,6 @@ public class TicketResponse {
     private String email;
 
     private Long placeId;
+
+    private Long eventId;
 }

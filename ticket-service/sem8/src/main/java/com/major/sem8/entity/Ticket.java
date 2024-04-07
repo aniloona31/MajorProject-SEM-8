@@ -37,7 +37,6 @@ public class Ticket {
 
     private List<Date> bookedDates;
 
-    @NotNull
     private Long placeId;
 
     private String placeName;
@@ -45,4 +44,6 @@ public class Ticket {
     private boolean confirmation;
 
     private boolean isValid;
+
+    private Long eventId;
 }
