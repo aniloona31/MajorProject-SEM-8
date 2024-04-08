@@ -35,7 +35,7 @@ function Place() {
             toast.error("error while fetching place");
         })
 
-    }, [])
+    }, [location.state])
 
 
     const { city, placeName } = useParams();

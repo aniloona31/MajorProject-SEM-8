@@ -150,6 +150,28 @@
     z-index: -1;
 }
 
+.searchResults{
+    position: absolute;
+    top: 64px;
+    left: 212px;
+    /* height: 20px; */
+    background: rgb(245,245,245);
+    /* transform: rotate(45deg); */
+    z-index: 1;
+}
+
+.searchResults>div{
+    list-style: none;
+    padding-top: 10px;
+    padding-left: 28px;
+    width: 412px;
+    padding-bottom: 10px;
+    border: #eee solid 2px;
+    border-top: 0px;
+    cursor: pointer;
+}
+
+
 .menu.active {
     opacity: 1;
     transform: translateY(0);
