@@ -5,7 +5,6 @@ import com.major.sem8.entity.Place;
 import com.major.sem8.exception.ApplicationException;
 import com.major.sem8.proxy.ReviewProxy;
 import com.major.sem8.repository.PlaceRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -111,5 +110,17 @@ public class PlaceService {
     public String getImageByPlaceId(Long placeId) {
         Place place = placeRepository.findById(placeId).orElseThrow(() ->  new ApplicationException("INVALID PLACE",HttpStatus.BAD_REQUEST));
         return place.getMainImage();
+    }
+
+    public List<PlaceResponse> searchPlaces(String placeName) {
+        try{
+            List<Place> list = placeRepository.findByPlaceNameContaining(placeName);
+            if(list.isEmpty()){
+                return null;
+            }
+            return list.stream().map(this::mapToDto).collect(Collectors.toList());
+        }catch (Exception e){
+            throw new ApplicationException("error while getting places", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

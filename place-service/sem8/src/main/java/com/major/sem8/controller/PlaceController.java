@@ -7,6 +7,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,11 @@ public class PlaceController {
     @GetMapping("/image")
     public ResponseEntity<String> getImage(@RequestParam("placeId") Long placeId){
         return new ResponseEntity<>(placeService.getImageByPlaceId(placeId), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PlaceResponse>> searchPlaces(@RequestParam(value = "place") String placeName){
+        return new ResponseEntity<>(placeService.searchPlaces(placeName), HttpStatusCode.valueOf(200));
     }
 
 }
