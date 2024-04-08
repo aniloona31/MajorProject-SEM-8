@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import categories from '../../Utils/Categories'
 import { useStateValue } from '../../Context/StateProvider'
 import cities from '../../Utils/Cities'
+import axios from 'axios'
 
 
   const styles = {
@@ -41,6 +42,38 @@ function Navbar() {
     })
   }
 
+  const debounce = (cb, delay = 1000) => {
+    let timeout
+    return (text) => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        cb(text);
+      },delay);
+    }
+  }
+
+  const searchPlaces = debounce((text) => {
+    // console.log(text);
+    if(text === "")return;
+    const url = process.env.REACT_APP_ROOT_URL + '/place/search';
+    axios.get(url,{
+      params:{
+        "place" : text
+      },
+      headers: {
+        "Content-Type": "appliction/json"
+      }
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
+  },1000)
+
+  const handleChange = (e) => {
+    searchPlaces(e.target.value);
+  }
+
   return (
     <div className='navbarContainer'>
         <div className='searchBar'>
@@ -49,7 +82,7 @@ function Navbar() {
             </div>
             <div className='centreElements'>
                 <span className='searchLogo'><FontAwesomeIcon icon={faMagnifyingGlass} /></span>
-                <input type='text' placeholder='Search for Place'/>
+                <input type='text' placeholder='Search for Place' onChange={(e) => handleChange(e)}/>
             </div>
             <div className='rightElements'>
                 <Select style={styles} dropdownHandle = {true} closeOnSelect = {true} options={cities} onChange={(values)=>{setCity(values)}} value={city} placeholder={city}/>

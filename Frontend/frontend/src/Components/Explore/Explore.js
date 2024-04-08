@@ -79,13 +79,13 @@ function Explore() {
                 "Content-Type": "application/json"
             }
         }).then((res) => {
-            // console.log(res);
+            console.log("on explore",res);
             if (res.status === 200) {
                 setPlaces(res.data);
                 setLoader(false);
             }
         }).catch((error) => {
-            // console.log(error);
+            console.log(error);
             toast.error(error.response.data);
             setLoader(false)
         })
@@ -94,10 +94,10 @@ function Explore() {
     return (
         <div className='exploreTopContainer'>
             <ToastContainer />
-            {Cities.find((item) => { return (item === city) }) == undefined
+            {Cities.find((item) => { return (item["label"] === city) }) == undefined
                 ?
                 <div className='invalidPlaceContainer'>
-                    <p>place doesn't exist</p>
+                    <p> City doesn't exist</p>
                 </div>
                 :
                 categories.find((item) => { return (item === category || category === "places") }) == undefined
