@@ -25,10 +25,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: left;
     flex-wrap: wrap;
 }
 
 .eachPlace{
     margin-bottom: 40px;
+    margin-right: 80px;
 }
