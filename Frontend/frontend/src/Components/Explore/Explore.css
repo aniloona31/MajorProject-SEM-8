@@ -1,7 +1,7 @@
 .exploreContainer{
     display: flex;
     flex-direction: row;
-    padding: 20px 20px 20px 20px;
+    padding: 0px 20px 20px 0px;
     /* justify-content: center;
     align-items: center; */
     background-color: #f5f5f5;
@@ -14,7 +14,13 @@
 }
 
 .filterContainer{
+    background-color: white;
+    /* border: solid rgb(245,245,245) 2px; */
+    height: fit-content;
     flex: 1;
+    padding-left: 20px;
+    margin-right: 20px;
+    padding-bottom: 36px;
 }
 
 .placesContainer{
@@ -32,4 +38,59 @@
 .eachPlace{
     margin-bottom: 40px;
     margin-right: 80px;
+}
+
+.priceRange{
+    display: flex;
+    flex-direction: column;
+}
+
+.priceRange>ul{
+    padding: 0;
+    margin-top: -5px;
+}
+
+.priceRange>ul>li{
+    list-style: none;
+    /* color: rgb(7,7,173); */
+    font-weight: 500;
+    color: rgb(7,7,173);
+}
+
+.filterCategories{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-top: -20px;
+}
+
+.filterCategories>button{
+    margin-right: 10px;
+    margin-top: 20px;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    background-color: white; 
+    color: black; 
+    border: 2px solid rgb(7,7,173);
+    border-radius: 10px;
+}
+
+.filterCategories>button:hover{
+    background-color: rgb(7,7,173,0.8);
+    color: white;
+}
+
+.filterApply>button{
+    width: 90%;
+    background-color: rgb(7,7,173);
+    cursor: pointer;
+    color: white;
+    padding-top: 10px;
+    font-size: large;
+    border: solid 5px;
+    border-radius: 10px;
+    /* font-weight: 500; */
+    margin-top: 10px;
+    padding-bottom: 10px;
 }
