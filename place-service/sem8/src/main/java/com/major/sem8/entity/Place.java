@@ -31,7 +31,7 @@ public class Place {
     @NotNull
     private String city;
 
-    private String ticketPrice;
+    private Integer ticketPrice;
 
     private String category;
 

@@ -33,6 +33,14 @@ public class PlaceController {
         return new ResponseEntity<>(placeService.getAllPlacesByCity(city,category,pageSize,pageNumber), HttpStatus.OK);
     }
 
+    @GetMapping("/all/filter")
+    public ResponseEntity<List<PlaceResponse>> getAllPlacesByFilter(@RequestParam(value = "min", defaultValue = "0") Integer min,
+                                                                    @RequestParam(value = "max", defaultValue = "100000") Integer max,
+                                                                    @RequestParam(value = "categories") List<String> categories,
+                                                                    @RequestParam(value = "city") String city){
+        return new ResponseEntity<>(placeService.getAllPlacesByFilter(min,max,categories,city),HttpStatus.OK);
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<PlaceResponse> getPlaceById(@PathVariable Long id){
         return new ResponseEntity<>(placeService.getPlaceById(id),HttpStatus.OK);

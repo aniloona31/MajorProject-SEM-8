@@ -104,7 +104,7 @@ public class PlaceService {
     }
     public Double getPrice(Long placeId) {
         Place place = placeRepository.findById(placeId).orElseThrow(() ->  new ApplicationException("INVALID PLACE",HttpStatus.BAD_REQUEST));
-        return Double.parseDouble(place.getTicketPrice());
+        return Double.valueOf(place.getTicketPrice());
     }
 
     public String getImageByPlaceId(Long placeId) {
@@ -121,6 +121,19 @@ public class PlaceService {
             return list.stream().map(this::mapToDto).collect(Collectors.toList());
         }catch (Exception e){
             throw new ApplicationException("error while getting places", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public List<PlaceResponse> getAllPlacesByFilter(Integer min, Integer max, List<String> categories,String city) {
+        try{
+            List<Place> places = placeRepository.findAllByFilter(min,max,categories,city);
+            if(places.isEmpty())return null;
+
+            return places.stream()
+                    .map(this::mapToDto)
+                    .collect(Collectors.toList());
+        }catch (Exception e){
+            throw new ApplicationException("couldn't apply filter",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

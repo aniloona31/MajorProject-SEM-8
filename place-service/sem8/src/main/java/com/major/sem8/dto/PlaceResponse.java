@@ -33,7 +33,7 @@ public class PlaceResponse {
 
     private String category;
 
-    private String price;
+    private Integer price;
 
     private List<String> images;
 }
