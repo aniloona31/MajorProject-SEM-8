@@ -125,7 +125,7 @@ function Navbar() {
                 <ul>
                   <li><span onClick={() => { }}><FontAwesomeIcon icon={faUser} />&nbsp;Profile</span></li>
                   <li><span onClick={() => { navigate("/my-tickets") }}><FontAwesomeIcon icon={faTicket} />&nbsp;Tickets</span></li>
-                  <li><span onClick={() => { }}><FontAwesomeIcon icon={faQuestion} />&nbsp;Q&A</span></li>
+                  <li><span onClick={() => { navigate("/q&a") }}><FontAwesomeIcon icon={faQuestion} />&nbsp;Q&A</span></li>
                   <li><span onClick={() => { }}><FontAwesomeIcon icon={faCircleInfo} />&nbsp;Help</span></li>
                   <li><span onClick={() => { signOut() }}><FontAwesomeIcon icon={faRightFromBracket} />&nbsp;Sign Out</span></li>
                 </ul>

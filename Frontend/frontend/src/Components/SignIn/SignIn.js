@@ -45,7 +45,6 @@ function SignIn() {
 
     return (
         <div className="login-container">
-            <ToastContainer />
             {loader ? <div className='placeLoader'><Oval
                 visible={true}
                 height="80"
@@ -56,6 +55,7 @@ function SignIn() {
                 wrapperClass=""
             /></div> :
                 <form className="login-form">
+                    <ToastContainer />
                     <h1>Welcome Back</h1>
                     <p>Please login to your account</p>
                     <div className="input-group">

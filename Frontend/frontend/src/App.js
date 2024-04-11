@@ -12,6 +12,7 @@ import Tickets from './Components/Tickets/Tickets';
 import BookingForm from './Components/BookingForm/BookingForm';
 import RazorpayGateway from './Components/RazorpayGateway/RazorpayGateway';
 import EventPage from './Components/EventPage/EventPage';
+import Forum from './Components/Forum/Forum';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/:placeName/booking' element={<BookingForm/>}/>
           <Route path='/:ticketId/payment' element={<RazorpayGateway/>}/>
           <Route path='/event/:id' element={<EventPage/>}/>
+          <Route path='/q&a' element={<Forum/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer/>
