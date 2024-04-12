@@ -24,6 +24,7 @@
     padding: 0px 20px 20px 20px;
     border-radius: 20px;
     height: 200px;
+
     /* border: solid 5px; */
 }
 
@@ -70,4 +71,11 @@
 
 .addQuestion>button:hover{
     opacity: 0.8;
+}
+
+.questions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
