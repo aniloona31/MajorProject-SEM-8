@@ -78,6 +78,7 @@ function RazorpayGateway() {
             },
         };
         const rzp1 = new window.Razorpay(options);
+        console.log('window opened')
         rzp1.open();
     };
 
