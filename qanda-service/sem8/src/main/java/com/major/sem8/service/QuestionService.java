@@ -22,7 +22,7 @@ public class QuestionService {
 
     public List<QuestionDto> getAllQuestions() {
         try{
-            List<Question> questions = questionRepository.findAll();
+            List<Question> questions = questionRepository.findAllByOrderByAskedDateDesc();
             return questions.stream().map(this::mapToQuestionDto).collect(Collectors.toList());
         }catch (Exception e){
             throw  new ApplicationException("ERROR WHILE FETCHING QUESTIONS", HttpStatus.INTERNAL_SERVER_ERROR);

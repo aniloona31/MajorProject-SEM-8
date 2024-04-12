@@ -66,6 +66,7 @@ function Question({ question }) {
             <div className={`accordion-item ${isOpen ? 'open' : ''}`}>
                 <div className="accordion-item-header">
                     <span className="accordion-item-header-title">{question.question}</span>
+                    <div style={{color:"grey",marginBottom:"5px"}}>{question.askedDate.substring(0,10)}</div>
                 </div>
                 <div className='accordianButtons'>
                     <span onClick={() => openAccordian()} style={{ display: "flex", alignItems: "center", flexDirection: "row", cursor: "pointer", color: "rgb(7,7,173)" }}><FontAwesomeIcon style={{ height: "20px", width: "20px", marginRight: "3px" }} icon={faCommentDots} />Replies</span>
