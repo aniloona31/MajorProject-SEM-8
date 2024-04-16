@@ -2,3 +2,4 @@ Docker Images
 auth-service - docker.io/anirudhloona26/ghumantu-auth-service:0.0.1-SNAPSHOT  
 service-registry - docker.io/anirudhloona26/ghumantu-service-registry:0.0.1-SNAPSHOT  
 place-service - docker.io/anirudhloona26/ghumantu-place-service:0.0.1-SNAPSHOT  
+qanda-service - docker.io/anirudhloona26/ghumantu-qanda-service:0.0.1-SNAPSHOT  
