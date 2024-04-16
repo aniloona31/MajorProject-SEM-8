@@ -24,6 +24,6 @@ public class Question {
 
     private Date askedDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question",cascade = CascadeType.ALL)
     private List<Answer> answers;
 }
