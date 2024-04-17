@@ -108,7 +108,9 @@ public class TicketService {
             return mapToDto(ticket);
 
         }catch(Exception e){
-            throw new ApplicationException("error while generating ticket", HttpStatus.INTERNAL_SERVER_ERROR);
+//            e.printStackTrace();
+//            throw new ApplicationException("error while generating ticket", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException(e);
         }
     }
     public TicketResponse buyTicket(Ticket details) {
@@ -123,6 +125,7 @@ public class TicketService {
                 return buyTicketForEvent(details);
             }
         }catch (Exception e){
+            e.printStackTrace();
             throw new ApplicationException("couldn't process buy ticket request",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
