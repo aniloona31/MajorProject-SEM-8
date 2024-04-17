@@ -17,10 +17,12 @@ function Event() {
             "Content-Type": "application/json"
         }
     }).then((res) => {
+        console.log('events are',res);
         if(res.status == 200){
             setEvents(res.data);
         }
     }).catch((err) => {
+        console.log(err)
         toast.error("couldn't fetch events");
     })
 
@@ -32,11 +34,11 @@ function Event() {
         <ToastContainer/>
         <p className='eventHeading'>Events</p>
         <div className='eventCards'>
-            {events?.map((event) => {
+            {events.length>0 ? events.map((event) => {
                 return(
                     <EventCard key={event.id} event={event}/>
                 )
-            })}
+            }) : <h2 style={{marginTop:"-20px", color:"white"}}>No Recent Events</h2>}
         </div>
     </div>
   )

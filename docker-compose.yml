@@ -49,6 +49,7 @@ services:
       - ghumantu
     depends_on:
       - service-registry
+      - review-service
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
 
