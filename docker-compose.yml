@@ -1,6 +1,41 @@
 version: '3.7'
 
 services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+    networks:
+      - ghumantu
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+#    hostname: localhost
+    networks:
+      - ghumantu
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  ticket-service:
+    image: docker.io/anirudhloona26/ghumantu-ticket-service:0.0.1-SNAPSHOT
+    ports:
+      - "9093:9093"
+    networks:
+      - ghumantu
+    depends_on:
+      - kafka
+      - service-registry
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
+      SPRING.KAFKA.BOOTSTRAPSERVERS: kafka:9092
+
   api-gateway:
     image: docker.io/anirudhloona26/ghumantu-api-gateway:0.0.1-SNAPSHOT
     ports:
@@ -63,7 +98,6 @@ services:
       - service-registry
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
-
 
 networks:
   ghumantu:
