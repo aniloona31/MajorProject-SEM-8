@@ -247,13 +247,13 @@ function Explore() {
                                 wrapperClass=""
                             /> :
                                 <div className='allPlaces'>
-                                    {places?.map((place) => {
+                                    {places.length>0 ? places.map((place) => {
                                         return (
                                             <div className='eachPlace'>
                                                 <Card key={place.placeName} place={place} />
                                             </div>
                                         )
-                                    })}
+                                    }) : <></>}
                                 </div>}
                         </div>
                     </div>}

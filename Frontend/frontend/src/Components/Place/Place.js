@@ -52,11 +52,13 @@ function Place() {
         if (localStorage.getItem('token') === null) {
             navigate('sign-in');
         }
-        navigate(`/${placeName}/booking`, { state: {
-            "id" : location.state,
-            "price" : place.price,
-            "type" : "place"
-        } });
+        navigate(`/${placeName}/booking`, {
+            state: {
+                "id": location.state,
+                "price": place.price,
+                "type": "place"
+            }
+        });
     }
 
     return (
@@ -100,12 +102,15 @@ function Place() {
                         <div className='customerPhotos'>
                             <p className='photoss'>Customer Photos</p>
                             <section>
-                                {place?.images?.slice(0,Math.min(5,place.images.length)).map((photo,i) => {
-                                    if(i == 5 || i == place.images.length-1){
+                                {place?.images?.slice(0, Math.min(5, place.images.length)).map((photo, i) => {
+                                    if (i == 4 || i == place.images.length - 1) {
                                         return (
-                                            <div onClick={() => { changeViewGallery() }} style={{ backgroundColor: "grey", backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png)` }} className={`box box-${k++}`}></div>
+                                            <>
+                                                <div style={{ backgroundImage: `url(${photo})` }} className={`box box-${k++}`}></div>
+                                                <div onClick={() => { changeViewGallery() }} style={{ backgroundColor: "grey", backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/1200px-Plus_symbol.svg.png)` }} className={`box box-${k++}`}></div>
+                                            </>
                                         )
-                                    }else{
+                                    } else {
                                         return (
                                             <div style={{ backgroundImage: `url(${photo})` }} className={`box box-${k++}`}></div>
                                         )
