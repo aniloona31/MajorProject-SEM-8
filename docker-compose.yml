@@ -12,7 +12,6 @@ services:
     image: wurstmeister/kafka:latest
     ports:
       - "9092:9092"
-#    hostname: localhost
     networks:
       - ghumantu
     environment:
@@ -32,6 +31,19 @@ services:
     depends_on:
       - kafka
       - service-registry
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
+      SPRING.KAFKA.BOOTSTRAPSERVERS: kafka:9092
+
+  payment-service:
+    image: docker.io/anirudhloona26/ghumantu-payment-service:0.0.1-SNAPSHOT
+    ports:
+      - "9094:9094"
+    networks:
+      - ghumantu
+    depends_on:
+      - service-registry
+      - kafka
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
       SPRING.KAFKA.BOOTSTRAPSERVERS: kafka:9092
