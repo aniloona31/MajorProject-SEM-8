@@ -48,6 +48,19 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
       SPRING.KAFKA.BOOTSTRAPSERVERS: kafka:9092
 
+  email-service:
+    image: docker.io/anirudhloona26/ghumantu-email-service:0.0.1-SNAPSHOT
+    ports:
+      - "9096:9096"
+    networks:
+      - ghumantu
+    depends_on:
+      - service-registry
+      - kafka
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
+      SPRING.KAFKA.BOOTSTRAPSERVERS: kafka:9092
+
   api-gateway:
     image: docker.io/anirudhloona26/ghumantu-api-gateway:0.0.1-SNAPSHOT
     ports:
