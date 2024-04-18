@@ -17,7 +17,7 @@ public class ApiGatewayConfig {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(r->r.path("/payment/orderId/**").and().method(HttpMethod.GET).uri("lb://payment-service"))
+                .route(r -> r.path("/payment/orderId/**").uri("lb://payment-service"))
                 .route(r -> r.path("/auth/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://auth-service"))
                 .route(r -> r.path("/place/**").uri("lb://place-service"))
                 .route(r -> r.path("/event/**").uri("lb://place-service"))
