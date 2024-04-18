@@ -90,16 +90,16 @@ services:
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
 
-#  qanda-service:
-#    image: docker.io/anirudhloona26/ghumantu-qanda-service:0.0.1-SNAPSHOT
-#    ports:
-#      - "9097:9097"
-#    networks:
-#      - ghumantu
-#    depends_on:
-#      - service-registry
-#    environment:
-#      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
+  qanda-service:
+    image: docker.io/anirudhloona26/ghumantu-qanda-service:0.0.1-SNAPSHOT
+    ports:
+      - "9097:9097"
+    networks:
+      - ghumantu
+    depends_on:
+      - service-registry
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://service-registry:8761/eureka
 
   place-service:
     image: docker.io/anirudhloona26/ghumantu-place-service:0.0.1-SNAPSHOT
