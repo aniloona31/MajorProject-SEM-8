@@ -1,6 +1,7 @@
 package com.major.sem8.controller;
 
 import com.major.sem8.entity.Ticket;
+import com.major.sem8.entity.User;
 import com.major.sem8.service.EmailService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,13 @@ public class MailController {
         emailService.sendEmail(ticket);
     }
 
-//    @PostMapping("/send")
-//    public void sendEmail(@RequestBody Ticket ticket) throws MessagingException {
-//        System.out.println(ticket);
-//        emailService.sendEmail(ticket);
-//    }
+    @KafkaListener(
+            topics = "verification-event",
+            concurrency = "1",
+            groupId = "email-processor"
+    )
+    public void sendVerificationEmail(User user) throws MessagingException {
+        emailService.sendVerificationEmail(user);
+    }
+
 }

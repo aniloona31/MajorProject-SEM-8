@@ -1,6 +1,7 @@
 package com.major.sem8.service;
 
 import com.major.sem8.entity.Ticket;
+import com.major.sem8.entity.User;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,29 @@ public class EmailService {
             mimeMessageHelper.setFrom(fromEmail);
             mimeMessageHelper.setTo(ticket.getEmail());
             mimeMessageHelper.setSubject("Ticket Confirmation From GHUMANTU");
+            mimeMessageHelper.setText(emailContent,true);
+
+            javaMailSender.send(mimeMessage);
+        }catch (Exception e){
+            throw new RuntimeException("error while sending email");
+        }
+    }
+
+    public void sendVerificationEmail(User user) throws MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
+
+        Context context = new Context();
+
+        try {
+            context.setVariable("email",user.getEmail());
+
+            String emailContent = templateEngine.process("EmailVerification",context);
+
+            mimeMessageHelper.setFrom(fromEmail);
+            mimeMessageHelper.setTo(user.getEmail());
+            mimeMessageHelper.setSubject("Email Verification From GHUMANTU");
             mimeMessageHelper.setText(emailContent,true);
 
             javaMailSender.send(mimeMessage);

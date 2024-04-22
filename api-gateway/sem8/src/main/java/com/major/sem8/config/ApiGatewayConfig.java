@@ -18,7 +18,7 @@ public class ApiGatewayConfig {
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r -> r.path("/payment/orderId/**").uri("lb://payment-service"))
-                .route(r -> r.path("/auth/**").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://auth-service"))
+                .route(r -> r.path("/auth/**").uri("lb://auth-service"))
                 .route(r -> r.path("/place/**").uri("lb://place-service"))
                 .route(r -> r.path("/event/**").uri("lb://place-service"))
                 .route(r -> r.path("/review/add-review").filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config()))).uri("lb://review-service"))

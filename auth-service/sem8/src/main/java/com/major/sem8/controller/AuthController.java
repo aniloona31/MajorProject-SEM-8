@@ -30,4 +30,10 @@ public class AuthController {
         boolean valid = service.validateToken(token);
         return "Token is valid";
     }
+
+    @GetMapping("/verify/{email}")
+    public ResponseEntity<String> verifyEmail(@PathVariable("email") String email){
+        return new ResponseEntity<>(service.verifyEmail(email),HttpStatus.OK);
+    }
+
 }

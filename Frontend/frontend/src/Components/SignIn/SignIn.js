@@ -36,9 +36,11 @@ function SignIn() {
         }).catch((error) => {
             setLoader(false);
             if (error.code === "ERR_BAD_REQUEST")
-                toast.error("Invalid Credentials");
+                toast.error("Invalid Credentials or Not Registered");
             else if (error.code === "ERR_BAD_RESPONSE")
                 toast.error("Internal Server Error");
+            console.log(error);
+            toast.error(error.response.data.message);
         })
 
     }

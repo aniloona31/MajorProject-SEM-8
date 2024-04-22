@@ -16,7 +16,11 @@ function SignUp() {
   const signUp = (e) => {
     e.preventDefault();
     const url = process.env.REACT_APP_ROOT_URL + "/auth/register";
-    axios.post(url, {email, password})
+    axios.post(url, {
+        "email": email,
+        "password": password,
+        "username": username
+    })
     .then((res) => {
      if(res.status === 201){
         notify(res.data)
@@ -25,7 +29,7 @@ function SignUp() {
         notify("Error while adding user","success")
      }   
     })
-    .catch((error) => {notify("Error while adding user","error")})
+    .catch((error) => {console.log(error);notify(error.response.data.message,"error")})
   }
 
   const notify = (msg, type) =>{
