@@ -9,7 +9,15 @@ const cities = [
     },
     {
         value: 3,
-        label: "Ganganagar"
+        label: "Bangalore"
+    },
+    {
+        value: 4,
+        label: "Udaipur"
+    },
+    {
+        value: 5,
+        label: "Ahmedabad"
     }
 ];
 

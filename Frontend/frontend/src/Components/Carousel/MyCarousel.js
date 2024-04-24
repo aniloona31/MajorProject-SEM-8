@@ -9,12 +9,12 @@ const homeImages = [
         image : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/2560px-Taj_Mahal_%28Edited%29.jpeg"
     },
     {
-        placeName : "Taj Mahal",
-        image : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/2560px-Taj_Mahal_%28Edited%29.jpeg"
+        placeName : "Adiyogi",
+        image : "https://t3.ftcdn.net/jpg/04/07/58/18/360_F_407581874_mKNEdzyrTzNBLQEP099y3TPCEaD7do3F.jpg"
     },
     {
-        placeName : "Taj Mahal",
-        image : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/2560px-Taj_Mahal_%28Edited%29.jpeg"
+        placeName : "Nandi Hills",
+        image : "https://i0.wp.com/www.zingbus.com/blog/wp-content/uploads/2024/01/nandi-hills-sunrise-view-point-karnataka-1.jpg"
     },
 ] 
 
