@@ -10,3 +10,4 @@ payment-service - docker.io/anirudhloona26/ghumantu-payment-service:0.0.1-SNAPSH
 email-service - docker.io/anirudhloona26/ghumantu-email-service:0.0.1-SNAPSHOT  
 
 RUN DOCKER COMPOSE TO START THE BACKEND  
+First run the postgres docker container and create the requeired schemas in it and later run all the servicies in docker composer.  
