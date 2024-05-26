@@ -119,7 +119,7 @@ function Navbar() {
             ?
             <div onClick={() => profileClick()} className='profile'>
               <div class="img-box">
-                <img src="https://i.postimg.cc/BvNYhMHS/user-img.jpg" alt="some user image" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGlbSV-T3Hw-JlgQm87e6MZWyPlq57ezpyH-R_f2Pu-Q&s" alt="some user image" />
               </div>
               <div class="menu">
                 <ul>
