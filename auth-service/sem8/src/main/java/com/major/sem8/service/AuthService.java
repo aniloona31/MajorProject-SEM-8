@@ -73,9 +73,9 @@ public class AuthService {
     public String saveUser(User credential) {
         Optional<User> user = userRepository.findByEmail(credential.getEmail());
         User userToSend = null;
-        if(!user.isEmpty() && user.get().isEnabled()){
+        if(user != null && user.get().isEnabled()){
             throw new ApplicationException("user with email already exists",HttpStatus.INTERNAL_SERVER_ERROR);
-        }else if(!user.isEmpty() && !user.get().isEnabled()){
+        }else if(user != null && !user.get().isEnabled()){
             User currentUser = user.get();
             currentUser.setTimestamp(LocalDateTime.now());
             currentUser.setPassword(passwordEncoder.encode(credential.getPassword()));
