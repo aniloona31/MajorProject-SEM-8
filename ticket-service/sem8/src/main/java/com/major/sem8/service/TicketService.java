@@ -38,7 +38,7 @@ public class TicketService {
 
     private static Logger LOG = LoggerFactory.getLogger(TicketService.class);
 
-    private Double getTicketPrice(Long placeId){
+    protected Double getTicketPrice(Long placeId){
         try{
             Double price = placeProxy.getPrice(placeId).getBody();
             System.out.println(price);
@@ -48,7 +48,7 @@ public class TicketService {
         }
     }
 
-    private Double getTicketPriceForEvent(Long eventId){
+    protected Double getTicketPriceForEvent(Long eventId){
         try{
             Double price = placeProxy.getEventPrice(eventId).getBody();
 //            System.out.println(price);
